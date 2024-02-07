@@ -4,9 +4,11 @@ import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Homepage from "./components/Homepage";
 import About from "./components/About";
-import Gallery from "./components/Gallery";
+import Projects from "./components/Projects";
 import Talents from "./components/Talents";
 import NotFound from "./components/NotFound";
+import SignUp from "./components/SignUp";
+import LogIn from "./components/LogIn";
 
 function App() {
   return (
@@ -14,11 +16,14 @@ function App() {
       <Navbar />
 
       <Routes>
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/login" element={<LogIn />} />
+
         <Route path="/" element={<Homepage />} />
 
         <Route path="/about" element={<About />} />
 
-        <Route path="/gallery" element={<Gallery />} />
+        <Route path="/projects" element={<Projects />} />
 
         <Route path="/talents" element={<Talents />} />
 

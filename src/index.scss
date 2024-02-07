@@ -1,41 +1,46 @@
 /* STYLE GUIDE */
 
+$font-size-64: 4rem;
+$font-size-48: 3rem;
+$font-size-32: 2rem;
+$font-size-22: 1.375rem;
+$font-size-18: 1.125rem;
+$font-size-16: 1rem;
+$font-size-14: 0.875rem;
+
+$color-white: #ffffff;
+$color-off-white: #eeeeee;
+$color-divider: #eeeeee10;
+$color-accent: #00adb5;
+$color-grey: #393e46;
+$color-dark: #222831;
+
+$gap-0-5: 0.5rem;
+$gap-0-75: 0.75rem;
+$gap-1: 1rem;
+$gap-1-5: 1.5rem;
+$gap-2: 2rem;
+$gap-l: 3rem;
+$gap-xl: 5rem;
+$gap-xxl: 10rem;
+
+$box-shadow: 1px 10px 16px 0px rgba(0, 0, 0, 0.4);
+
 :root {
   font-size: 16px;
-  --font-size-64: 4rem;
-  --font-size-48: 3rem;
-  --font-size-32: 2rem;
-  --font-size-22: 1.375rem;
-  --font-size-18: 1.125rem;
-  --font-size-16: 1rem;
-  --font-size-14: 0.875rem;
 
-  --color-white: #ffffff;
-  --color-off-white: #eeeeee;
-  --color-accent: #00adb5;
-  --color-grey: #393e46;
-  --color-dark: #222831;
-
-  --gap-xxs: 0.5rem;
-  --gap-xs: 0.75rem;
-  --gap-s: 1rem;
-  --gap-m: 2rem;
-  --gap-l: 3rem;
-  --gap-xl: 5rem;
-  --gap-xxl: 10rem;
-
-  font-family: "Poppins", sans-serif;
-  font-size: var(--font-size-18);
-  line-height: 1.4;
-  font-weight: 400;
-  color: var(--color-off-white);
-  background-color: var(--color-dark);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }
 
 body {
   font-size: 16px;
+  font-family: "Poppins", sans-serif;
+  font-size: $font-size-18;
+  line-height: 1.4;
+  font-weight: 400;
+  color: $color-off-white;
+  background-color: $color-dark;
 }
 * {
   box-sizing: border-box;
@@ -45,28 +50,28 @@ body {
 }
 
 .H1 {
-  font-size: var(--font-size-64);
+  font-size: $font-size-64;
   font-weight: 700;
 }
 
 .H2 {
-  font-size: var(--font-size-48);
+  font-size: $font-size-48;
   font-weight: 600;
 }
 
 .H3 {
-  font-size: var(--font-size-32);
+  font-size: $font-size-32;
   font-weight: 500;
 }
 
 p {
-  font-size: var(--font-size-18);
+  font-size: $font-size-18;
 }
 .paragraph-L {
-  font-size: var(--font-size-22);
+  font-size: $font-size-22;
 }
 .paragraph-S {
-  font-size: var(--font-size-16);
+  font-size: $font-size-16;
 }
 
 img {
@@ -77,11 +82,12 @@ img {
 a {
   text-decoration: none;
   cursor: pointer;
-  color: var(--color-off-white);
+  color: $color-off-white;
 }
 
 .section {
-  padding: var(--gap-xxl);
+  padding-top: 10rem;
+  padding-bottom: 10rem;
 }
 
 .container {
@@ -90,12 +96,122 @@ a {
   margin: auto;
 }
 
-/* --------------- BUTTON STYLES ----------------- */
-
-button {
-  cursor: pointer;
+.align-center {
+  text-align: center;
 }
 
+/* --------------- BUTTON STYLES ----------------- */
+
+.button {
+  cursor: pointer;
+  background-color: $color-accent;
+  color: $color-off-white;
+  font-weight: 800;
+  padding: 1rem 2rem;
+  font-size: $font-size-18;
+  border-radius: 3rem;
+  border: 0;
+  box-shadow: $box-shadow;
+}
+
+.button.secondary {
+  background-color: $color-grey;
+  color: $color-off-white;
+}
+
+.buttons-wrapper {
+  display: flex;
+  gap: $gap-1-5;
+}
+
+/* ------------------- Navbar --------------------- */
+
+.navbar {
+  border-bottom: 1px solid $color-divider;
+}
+
+.container.nav-container {
+  width: 1400vw;
+  padding: 3rem 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  .nav-left {
+    .brand {
+      width: 150px;
+    }
+  }
+
+  .nav-right {
+    display: flex;
+    gap: $gap-2;
+    .navlink {
+      font-size: $font-size-18;
+    }
+  }
+}
+
+/* ------------------- FORM --------------------- */
+
+.sign-form {
+  width: 800px;
+  max-width: 100%;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $gap-2;
+}
+.form-label {
+  display: flex;
+  flex-direction: column;
+  gap: $gap-0-5;
+
+  input {
+    border-radius: 1rem;
+    height: 60px;
+    background-color: $color-grey;
+    border: 0;
+    color: $color-off-white;
+    font-size: $font-size-18;
+    padding: 0 1.5rem;
+  }
+}
+
+/* ------------------- HOME --------------------- */
+// HERO --------------------------------------
+.hero-component {
+  display: flex;
+  justify-content: space-between;
+
+  .hero-content {
+    width: 50%;
+
+    .hero-logo {
+      padding: $gap-1-5 0;
+    }
+
+    .buttons-wrapper {
+      padding-top: $gap-2;
+    }
+  }
+
+  .hero-img-wrapper {
+    width: 45%;
+  }
+}
+
+/* ------------------- GALLERY GRID --------------------- */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $gap-2;
+
+  .gallery.card {
+    border-radius: 0.5rem;
+  }
+}
 /* ------------------- Media queries --------------------- */
 /* ------------------- TABLET --------------------- */
 
@@ -105,7 +221,4 @@ button {
 /* ------------------- MOBILE --------------------- */
 
 @media (max-width: 640px) {
-  :root {
-    font-size: 14px;
-  }
 }

@@ -1,7 +1,7 @@
 export default () => {
   return (
     <>
-      <h2>Talents</h2>
+      <h1>Talents</h1>
     </>
   );
 };

@@ -3,7 +3,9 @@ export default () => {
     <>
       <section className="section">
         <div className="container">
-          <h1 className="H1">About</h1>
+          <div className="align-center">
+            <h1 className="H1">Log in</h1>
+          </div>
           <p>Ciao</p>
         </div>
       </section>

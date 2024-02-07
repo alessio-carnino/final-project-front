@@ -9,11 +9,15 @@ export default () => {
               <figure className="hero-logo">
                 <img src="../logo.svg" alt="iNSPiREd logo" />
               </figure>
-              <p>
+              <p className="paragraph-L">
                 Discover a digital haven for creators! iNSPiREd is your canvas
                 to showcase, collaborate, and be inspired. Unleash your talent,
                 connect with a vibrant community, and let your creativity soar.
               </p>
+              <div className="buttons-wrapper">
+                <button className="button">Join Now</button>
+                <button className="button secondary">Learn More</button>
+              </div>
             </div>
 
             <figure className="hero-img-wrapper">
