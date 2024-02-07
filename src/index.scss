@@ -1,0 +1,111 @@
+/* STYLE GUIDE */
+
+:root {
+  font-size: 16px;
+  --font-size-64: 4rem;
+  --font-size-48: 3rem;
+  --font-size-32: 2rem;
+  --font-size-22: 1.375rem;
+  --font-size-18: 1.125rem;
+  --font-size-16: 1rem;
+  --font-size-14: 0.875rem;
+
+  --color-white: #ffffff;
+  --color-off-white: #eeeeee;
+  --color-accent: #00adb5;
+  --color-grey: #393e46;
+  --color-dark: #222831;
+
+  --gap-xxs: 0.5rem;
+  --gap-xs: 0.75rem;
+  --gap-s: 1rem;
+  --gap-m: 2rem;
+  --gap-l: 3rem;
+  --gap-xl: 5rem;
+  --gap-xxl: 10rem;
+
+  font-family: "Poppins", sans-serif;
+  font-size: var(--font-size-18);
+  line-height: 1.4;
+  font-weight: 400;
+  color: var(--color-off-white);
+  background-color: var(--color-dark);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-size: 16px;
+}
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  scroll-behavior: smooth;
+}
+
+.H1 {
+  font-size: var(--font-size-64);
+  font-weight: 700;
+}
+
+.H2 {
+  font-size: var(--font-size-48);
+  font-weight: 600;
+}
+
+.H3 {
+  font-size: var(--font-size-32);
+  font-weight: 500;
+}
+
+p {
+  font-size: var(--font-size-18);
+}
+.paragraph-L {
+  font-size: var(--font-size-22);
+}
+.paragraph-S {
+  font-size: var(--font-size-16);
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+  color: var(--color-off-white);
+}
+
+.section {
+  padding: var(--gap-xxl);
+}
+
+.container {
+  width: 1200px;
+  max-width: 90vw;
+  margin: auto;
+}
+
+/* --------------- BUTTON STYLES ----------------- */
+
+button {
+  cursor: pointer;
+}
+
+/* ------------------- Media queries --------------------- */
+/* ------------------- TABLET --------------------- */
+
+@media (max-width: 960px) {
+}
+
+/* ------------------- MOBILE --------------------- */
+
+@media (max-width: 640px) {
+  :root {
+    font-size: 14px;
+  }
+}
