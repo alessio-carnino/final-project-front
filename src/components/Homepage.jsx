@@ -1,3 +1,7 @@
+import About from "./About";
+import SignUp from "./SignUp";
+import { Link } from "react-router-dom";
+
 export default () => {
   return (
     <>
@@ -15,8 +19,12 @@ export default () => {
                 connect with a vibrant community, and let your creativity soar.
               </p>
               <div className="buttons-wrapper">
-                <button className="button">Join Now</button>
-                <button className="button secondary">Learn More</button>
+                <Link to={"/signup"} element={<SignUp />}>
+                  <button className="button">Join Now</button>
+                </Link>
+                <Link to={"/about"} element={<About />}>
+                  <button className="button secondary">Learn More</button>
+                </Link>
               </div>
             </div>
 

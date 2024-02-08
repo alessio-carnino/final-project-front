@@ -16,7 +16,7 @@ export default () => {
 
   return (
     <>
-      <section className="section">
+      <section className="section header">
         <div className="container">
           <div className="align-center">
             <h1 className="H1">Gallery</h1>

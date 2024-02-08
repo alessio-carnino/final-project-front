@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useUser } from "../../context/UserContext";
+import { useNavigate } from "react-router-dom";
 
 export default () => {
-  const { error, loading } = useUser();
+  const { signUp, error, loading } = useUser();
 
   const [formData, setFormData] = useState({
     first_name: "",
@@ -20,18 +20,17 @@ export default () => {
 
   const signUser = (e) => {
     e.preventDefault();
-
     signUp(formData);
-
     navigate("/");
   };
 
   return (
     <>
-      <section className="section">
+      <section className="section header">
         <div className="container">
           <div className="align-center">
             <h1 className="H1">Sing up</h1>
+            <div className="padding-3"></div>
           </div>
 
           <form className="sign-form">
@@ -151,7 +150,9 @@ export default () => {
               <button
                 className="button"
                 disabled={loading}
-                onClick={(e) => signUser(e)}
+                onClick={(e) => {
+                  return signUser(e);
+                }}
               >
                 Submit
               </button>
@@ -159,7 +160,24 @@ export default () => {
             {loading && <p className="paragraph-L">Loading...</p>}
             {error && <p className="paragraph-L">{error.message}</p>}
           </form>
+          <figure className="sign-figure">
+            <img
+              src="https://uploads-ssl.webflow.com/6389024564c0eaae543c5b10/65c4c653c37bc8bad2d4fc88_signup%20img.svg"
+              alt="graphic of a person walking the stairs"
+            />
+          </figure>
         </div>
+
+        <img
+          className="bg-img-1"
+          src="https://uploads-ssl.webflow.com/6389024564c0eaae543c5b10/65c4c797b3ff44000855af1d_keyboard.svg"
+          alt="decorative keyboard"
+        />
+        <img
+          className="bg-img-2"
+          src="https://uploads-ssl.webflow.com/6389024564c0eaae543c5b10/65c4c797d21f1fd78adf232e_mail.svg"
+          alt="decorative letter"
+        />
       </section>
     </>
   );

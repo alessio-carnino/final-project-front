@@ -36,8 +36,9 @@ export const UseProvider = ({ children }) => {
     setLoading(true);
 
     if (password !== repeat_password) {
-      throw new Error("Passwords don't match");
+      throw new Error(`Passwords don't match`);
     }
+
     try {
       const { data } = await axios.post(`${VITE_API_URL}/auth/signup`, {
         first_name,
@@ -57,8 +58,33 @@ export const UseProvider = ({ children }) => {
     }
   };
 
+  const logIn = async (props) => {
+    if (loading) return;
+
+    const { email, password } = props;
+
+    setError(null);
+    setLoading(true);
+
+    try {
+      const { data } = await axios.post(`${VITE_API_URL}/auth/login`, {
+        email,
+        password,
+      });
+      changeData(data);
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const value = {
     ...data,
+    logIn,
+    signUp,
     error,
     loading,
   };
