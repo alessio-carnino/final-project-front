@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, Navigate, useNavigate } from "react-router-dom";
 import Homepage from "./Homepage";
 import About from "./About";
 import Projects from "./Projects";
@@ -8,7 +8,8 @@ import LogIn from "./LogIn";
 import { useUser } from "../../context/UserContext";
 
 export default () => {
-  const { userData } = useUser();
+  const { userData, logOut } = useUser();
+  const navigate = useNavigate();
 
   return (
     <nav className="navbar">
@@ -43,6 +44,16 @@ export default () => {
               >
                 Talents
               </NavLink>
+
+              <button
+                className={"navlink"}
+                onClick={() => {
+                  logOut();
+                  navigate("/");
+                }}
+              >
+                Log Out
+              </button>
             </>
           ) : (
             <>

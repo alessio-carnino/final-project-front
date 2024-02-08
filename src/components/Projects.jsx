@@ -1,18 +1,27 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-const { VITE_API_URL } = import.meta.env;
 import { Link } from "react-router-dom";
+import { useUser } from "../../context/UserContext";
+import { axiosHeaders } from "../../libraries/utilitites";
+const { VITE_API_URL } = import.meta.env;
 
 export default () => {
+  const { token } = useUser();
+
   const [projects, setProjects] = useState();
   console.log(projects);
+  const [error, setError] = useState(false);
+  const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
     axios
-      .get(`${VITE_API_URL}/projects`)
+      .get(`${VITE_API_URL}/projects`, axiosHeaders(token))
       .then((obj) => setProjects(obj.data))
-      .catch((err) => console.error(err));
-  }, []);
+      .catch((e) => {
+        setError(e);
+        console.error(e);
+      });
+  }, [refresh]);
 
   return (
     <>
@@ -20,15 +29,35 @@ export default () => {
         <div className="container">
           <div className="align-center">
             <h1 className="H1">Gallery</h1>
+            <div className="padding-3"></div>
           </div>
-          <div className="gallery-grid">
-            <Link className="gallery-card">
-              <img
-                src="https://images.unsplash.com/photo-1505909182942-e2f09aee3e89?q=80&w=1172&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                alt="project cover"
-              />
-            </Link>
-          </div>
+
+          {error ? (
+            <p>{error}</p>
+          ) : (
+            <>
+              {projects === undefined ? (
+                <p>Loading...</p>
+              ) : (
+                <div className="gallery-grid">
+                  {projects.map((p, i) => {
+                    return (
+                      <Link
+                        key={`project-${i}`}
+                        className="gallery-card"
+                        to={`/projects/${p._id}`}
+                      >
+                        <img src={p.cover_img} alt="project cover" />
+                        <div className="gallery-card-top">
+                          <p className="card-title">{p.title}</p>
+                        </div>
+                      </Link>
+                    );
+                  })}
+                </div>
+              )}
+            </>
+          )}
         </div>
       </section>
     </>

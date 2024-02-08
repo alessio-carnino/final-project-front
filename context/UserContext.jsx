@@ -82,8 +82,18 @@ export const UseProvider = ({ children }) => {
     }
   };
 
+  const logOut = async (props) => {
+    if (loading) return;
+
+    setError(null);
+    setLoading(true);
+    changeData(null);
+    setLoading(false);
+  };
+
   const value = {
     userData,
+    logOut,
     logIn,
     signUp,
     error,

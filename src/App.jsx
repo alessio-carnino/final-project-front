@@ -12,7 +12,7 @@ import LogIn from "./components/LogIn";
 import { useUser } from "../context/UserContext";
 
 function App() {
-  const { user } = useUser();
+  const { userData } = useUser();
 
   return (
     <>
@@ -24,18 +24,18 @@ function App() {
 
         <Route
           path="/signup"
-          element={!user ? <SignUp /> : <Navigate to="/" />}
+          element={userData ? <Navigate to="/" /> : <SignUp />}
         />
         <Route
           path="/login"
-          element={!user ? <LogIn /> : <Navigate to="/" />}
+          element={!userData ? <LogIn /> : <Navigate to="/" />}
         />
 
-        <Route path="/projects" element={user ? <Outlet /> : <LogIn />}>
+        <Route path="/projects" element={userData ? <Outlet /> : <LogIn />}>
           <Route index element={<Projects />} />
         </Route>
 
-        <Route path="/talents" element={user ? <Outlet /> : <LogIn />}>
+        <Route path="/talents" element={userData ? <Outlet /> : <LogIn />}>
           <Route index element={<Talents />} />
         </Route>
 
