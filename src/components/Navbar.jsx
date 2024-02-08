@@ -8,7 +8,7 @@ import LogIn from "./LogIn";
 import { useUser } from "../../context/UserContext";
 
 export default () => {
-  const { user } = useUser();
+  const { userData } = useUser();
 
   return (
     <nav className="navbar">
@@ -19,49 +19,46 @@ export default () => {
           </NavLink>
         </div>
 
-        {!user && (
-          <menu className="nav-right">
-            <NavLink className={"navlink"} to={"/login"} element={<LogIn />}>
-              Log In
-            </NavLink>
-            <NavLink className={"navlink"} to={"/signup"} element={<SignUp />}>
-              Sign Up
-            </NavLink>
-          </menu>
-        )}
+        <menu className="nav-right">
+          <NavLink className={"navlink"} to={"/"} element={<Homepage />}>
+            Home
+          </NavLink>
+          <NavLink className={"navlink"} to={"/about"} element={<About />}>
+            About
+          </NavLink>
 
-        {user && (
-          <menu className="nav-right">
-            <NavLink className={"navlink"} to={"/"} element={<Homepage />}>
-              Home
-            </NavLink>
-            <NavLink className={"navlink"} to={"/about"} element={<About />}>
-              About
-            </NavLink>
-            <NavLink
-              className={"navlink"}
-              to={"/projects"}
-              element={<Projects />}
-            >
-              Gallery
-            </NavLink>
-            <NavLink
-              className={"navlink"}
-              to={"/talents"}
-              element={<Talents />}
-            >
-              Talents
-            </NavLink>
-
-            <NavLink className={"navlink"} to={"/signup"} element={<SignUp />}>
-              Sign up
-            </NavLink>
-
-            <NavLink className={"navlink"} to={"/login"} element={<LogIn />}>
-              Log in
-            </NavLink>
-          </menu>
-        )}
+          {userData ? (
+            <>
+              <NavLink
+                className={"navlink"}
+                to={"/projects"}
+                element={<Projects />}
+              >
+                Gallery
+              </NavLink>
+              <NavLink
+                className={"navlink"}
+                to={"/talents"}
+                element={<Talents />}
+              >
+                Talents
+              </NavLink>
+            </>
+          ) : (
+            <>
+              <NavLink className={"navlink"} to={"/login"} element={<LogIn />}>
+                <b>Log In</b>
+              </NavLink>
+              <NavLink
+                className={"navlink"}
+                to={"/signup"}
+                element={<SignUp />}
+              >
+                <b>Sign Up</b>
+              </NavLink>
+            </>
+          )}
+        </menu>
       </div>
     </nav>
   );

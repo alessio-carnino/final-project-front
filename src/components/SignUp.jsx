@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useUser } from "../../context/UserContext";
 import { useNavigate } from "react-router-dom";
 
 export default () => {
-  const { signUp, error, loading } = useUser();
+  const { signUp, error, loading, userData } = useUser();
 
   const [formData, setFormData] = useState({
     first_name: "",
@@ -21,8 +21,13 @@ export default () => {
   const signUser = (e) => {
     e.preventDefault();
     signUp(formData);
-    navigate("/");
   };
+
+  useEffect(() => {
+    if (userData !== null) {
+      navigate("/");
+    }
+  }, [userData]);
 
   return (
     <>

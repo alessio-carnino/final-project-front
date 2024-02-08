@@ -7,11 +7,13 @@ const UserContext = createContext();
 export const UseProvider = ({ children }) => {
   const storedData = localStorage.getItem("data");
 
-  const [data, setData] = useState(storedData ? JSON.parse(storedData) : null);
+  const [userData, setUserData] = useState(
+    storedData ? JSON.parse(storedData) : null
+  );
 
-  // immagino sia per il PATCH di user (???)
+  // not sure about this (???)
   const changeData = (newData) => {
-    setData(newData);
+    setUserData(newData);
     localStorage.setItem("data", JSON.stringify(newData));
   };
 
@@ -72,7 +74,6 @@ export const UseProvider = ({ children }) => {
         password,
       });
       changeData(data);
-      console.log(data);
     } catch (error) {
       console.error(error);
       setError(error.message);
@@ -82,7 +83,7 @@ export const UseProvider = ({ children }) => {
   };
 
   const value = {
-    ...data,
+    userData,
     logIn,
     signUp,
     error,

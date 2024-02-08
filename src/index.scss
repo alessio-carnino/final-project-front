@@ -49,6 +49,10 @@ body {
   scroll-behavior: smooth;
 }
 
+.accent-color {
+  color: $color-accent;
+}
+
 .padding-XS {
   padding-bottom: $gap-0-5;
 }
@@ -58,6 +62,10 @@ body {
 
 .padding-1 {
   padding-bottom: $gap-1;
+}
+
+.padding-1-5 {
+  padding-bottom: $gap-1-5;
 }
 
 .padding-2 {
@@ -88,7 +96,7 @@ body {
 
 .H3 {
   font-size: $font-size-32;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 p {
@@ -262,6 +270,21 @@ a {
 
   .hero-img-wrapper {
     width: 45%;
+  }
+}
+
+/* ------------------- ABOUT --------------------- */
+// HEADER --------------------------------------
+.about-component {
+  display: flex;
+  justify-content: space-between;
+
+  .about-content {
+    width: 40%;
+  }
+
+  .about-img-wrapper {
+    width: 55%;
   }
 }
 

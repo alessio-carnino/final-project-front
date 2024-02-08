@@ -13,6 +13,7 @@ export default () => {
               <figure className="hero-logo">
                 <img src="../logo.svg" alt="iNSPiREd logo" />
               </figure>
+              <div className="padding-1-5"></div>
               <p className="paragraph-L">
                 Discover a digital haven for creators! iNSPiREd is your canvas
                 to showcase, collaborate, and be inspired. Unleash your talent,
@@ -30,7 +31,7 @@ export default () => {
 
             <figure className="hero-img-wrapper">
               <img
-                src="https://images.unsplash.com/photo-1505909182942-e2f09aee3e89?q=80&w=1172&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                src="https://uploads-ssl.webflow.com/6389024564c0eaae543c5b10/65c4db97d61b0998c6e815c7_hero%20img.svg"
                 alt="grphic of a person looking for inspiration online"
               />
             </figure>
