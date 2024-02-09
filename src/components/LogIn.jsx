@@ -72,7 +72,9 @@ export default () => {
               </button>
             </div>
             {loading && <p className="paragraph-L">Loading...</p>}
-            {error && <p className="paragraph-L">{error.message}</p>}
+            {error && (
+              <p className="paragraph-L">Incorrect email or password</p>
+            )}
           </form>
           <figure className="sign-figure">
             <img

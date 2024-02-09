@@ -6,22 +6,21 @@ import { axiosHeaders } from "../../libraries/utilitites";
 const { VITE_API_URL } = import.meta.env;
 
 export default () => {
-  const { token } = useUser();
+  const { userData } = useUser();
 
   const [projects, setProjects] = useState();
   console.log(projects);
   const [error, setError] = useState(false);
-  const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
     axios
-      .get(`${VITE_API_URL}/projects`, axiosHeaders(token))
+      .get(`${VITE_API_URL}/projects`, axiosHeaders(userData.token))
       .then((obj) => setProjects(obj.data))
       .catch((e) => {
         setError(e);
         console.error(e);
       });
-  }, [refresh]);
+  }, []);
 
   return (
     <>
@@ -33,7 +32,7 @@ export default () => {
           </div>
 
           {error ? (
-            <p>{error}</p>
+            <p>{error.message}</p>
           ) : (
             <>
               {projects === undefined ? (

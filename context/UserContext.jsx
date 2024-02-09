@@ -23,6 +23,9 @@ export const UseProvider = ({ children }) => {
   const signUp = async (props) => {
     if (loading) return;
 
+    if (password !== repeat_password) {
+      throw new Error(`Passwords don't match`);
+    }
     const {
       first_name,
       last_name,
@@ -36,10 +39,6 @@ export const UseProvider = ({ children }) => {
 
     setError(null);
     setLoading(true);
-
-    if (password !== repeat_password) {
-      throw new Error(`Passwords don't match`);
-    }
 
     try {
       const { data } = await axios.post(`${VITE_API_URL}/auth/signup`, {

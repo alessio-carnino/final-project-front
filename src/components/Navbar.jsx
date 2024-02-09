@@ -52,7 +52,7 @@ export default () => {
                   navigate("/");
                 }}
               >
-                Log Out
+                <b>Log Out</b>
               </button>
             </>
           ) : (

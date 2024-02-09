@@ -1,8 +1,12 @@
+import { useUser } from "../../context/UserContext";
 import About from "./About";
+import Projects from "./Projects";
 import SignUp from "./SignUp";
 import { Link } from "react-router-dom";
 
 export default () => {
+  const { userData } = useUser();
+
   return (
     <>
       <section className="section hero">
@@ -20,12 +24,25 @@ export default () => {
                 connect with a vibrant community, and let your creativity soar.
               </p>
               <div className="buttons-wrapper">
-                <Link to={"/signup"} element={<SignUp />}>
-                  <button className="button">Join Now</button>
-                </Link>
-                <Link to={"/about"} element={<About />}>
-                  <button className="button secondary">Learn More</button>
-                </Link>
+                {userData ? (
+                  <>
+                    <Link to={"/projects"} element={<Projects />}>
+                      <button className="button">Get Inspired</button>
+                    </Link>
+                    <Link to={"/about"} element={<About />}>
+                      <button className="button secondary">Learn More</button>
+                    </Link>
+                  </>
+                ) : (
+                  <>
+                    <Link to={"/signup"} element={<SignUp />}>
+                      <button className="button">Join Now</button>
+                    </Link>
+                    <Link to={"/about"} element={<About />}>
+                      <button className="button secondary">Learn More</button>
+                    </Link>
+                  </>
+                )}
               </div>
             </div>
 

@@ -1,7 +1,11 @@
 import { Link } from "react-router-dom";
 import SignUp from "./SignUp";
+import { useUser } from "../../context/UserContext";
+import Projects from "./Projects";
 
 export default () => {
+  const { userData } = useUser();
+
   return (
     <>
       <section className="section header">
@@ -20,9 +24,15 @@ export default () => {
                 something extraordinary together!{" "}
               </p>
               <div className="padding-2"></div>
-              <Link to={"/signup"} element={<SignUp />}>
-                <button className="button">Join Now</button>
-              </Link>
+              {userData ? (
+                <Link to={"/projects"} element={<Projects />}>
+                  <button className="button">Get Inspired</button>
+                </Link>
+              ) : (
+                <Link to={"/signup"} element={<SignUp />}>
+                  <button className="button">Join Now</button>
+                </Link>
+              )}
             </div>
 
             <figure className="about-img-wrapper">
