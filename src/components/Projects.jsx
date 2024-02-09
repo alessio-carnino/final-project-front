@@ -13,8 +13,10 @@ export default () => {
   const [error, setError] = useState(false);
 
   useEffect(() => {
+    // console.log(userData.token);
     axios
       .get(`${VITE_API_URL}/projects`, axiosHeaders(userData.token))
+
       .then((obj) => setProjects(obj.data))
       .catch((e) => {
         setError(e);
@@ -27,7 +29,7 @@ export default () => {
       <section className="section header">
         <div className="container">
           <div className="align-center">
-            <h1 className="H1">Gallery</h1>
+            <h1 className="H1">Projects</h1>
             <div className="padding-3"></div>
           </div>
 
@@ -46,7 +48,11 @@ export default () => {
                         className="gallery-card"
                         to={`/projects/${p._id}`}
                       >
-                        <img src={p.cover_img} alt="project cover" />
+                        <img
+                          className="card-img"
+                          src={p.cover_img}
+                          alt="project cover"
+                        />
                         <div className="gallery-card-top">
                           <p className="card-title">{p.title}</p>
                         </div>

@@ -10,6 +10,8 @@ import NotFound from "./components/NotFound";
 import SignUp from "./components/SignUp";
 import LogIn from "./components/LogIn";
 import { useUser } from "../context/UserContext";
+import ProjectPage from "./components/ProjectPage";
+import UserPage from "./components/UserPage";
 
 function App() {
   const { userData } = useUser();
@@ -33,10 +35,12 @@ function App() {
 
         <Route path="/projects" element={userData ? <Outlet /> : <LogIn />}>
           <Route index element={<Projects />} />
+          <Route path={":_id"} element={<ProjectPage />} />
         </Route>
 
         <Route path="/talents" element={userData ? <Outlet /> : <LogIn />}>
           <Route index element={<Talents />} />
+          <Route path={":_id"} element={<UserPage />} />
         </Route>
 
         <Route path="/*" element={<NotFound />} />
