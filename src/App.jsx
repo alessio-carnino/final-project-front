@@ -11,7 +11,7 @@ import SignUp from "./components/SignUp";
 import LogIn from "./components/LogIn";
 import { useUser } from "../context/UserContext";
 import ProjectPage from "./components/ProjectPage";
-import UserPage from "./components/UserPage";
+import TalentPage from "./components/TalentPage";
 
 function App() {
   const { userData } = useUser();
@@ -40,7 +40,7 @@ function App() {
 
         <Route path="/talents" element={userData ? <Outlet /> : <LogIn />}>
           <Route index element={<Talents />} />
-          <Route path={":_id"} element={<UserPage />} />
+          <Route path={":_id"} element={<TalentPage />} />
         </Route>
 
         <Route path="/*" element={<NotFound />} />

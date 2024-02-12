@@ -14,6 +14,8 @@ export default () => {
     repeat_password: "",
     profession_title: "",
     cover_img: "",
+    description: "",
+    description_preview: "",
   });
 
   const navigate = useNavigate();
@@ -68,7 +70,7 @@ export default () => {
             </label>
 
             <label className="form-label">
-              User Name
+              User Name *
               <input
                 type="text"
                 value={formData.user_name}
@@ -82,7 +84,7 @@ export default () => {
             </label>
 
             <label className="form-label">
-              Email
+              Email *
               <input
                 type="email"
                 value={formData.email}
@@ -96,7 +98,7 @@ export default () => {
             </label>
 
             <label className="form-label">
-              Password
+              Password *
               <input
                 type="password"
                 value={formData.password}
@@ -110,7 +112,7 @@ export default () => {
             </label>
 
             <label className="form-label">
-              Repeat Password
+              Repeat Password *
               <input
                 type="password"
                 value={formData.repeat_password}
@@ -146,6 +148,34 @@ export default () => {
                   setFormData({
                     ...formData,
                     cover_img: e.target.value,
+                  });
+                }}
+              />
+            </label>
+
+            <label className="form-label two-col">
+              Description
+              <input
+                type="text"
+                value={formData.description}
+                onChange={(e) => {
+                  setFormData({
+                    ...formData,
+                    description: e.target.value,
+                  });
+                }}
+              />
+            </label>
+
+            <label className="form-label two-col">
+              Description preview
+              <input
+                type="text"
+                value={formData.description_preview}
+                onChange={(e) => {
+                  setFormData({
+                    ...formData,
+                    description_preview: e.target.value,
                   });
                 }}
               />

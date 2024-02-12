@@ -13,7 +13,6 @@ export default () => {
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    // console.log(userData.token);
     axios
       .get(`${VITE_API_URL}/projects`, axiosHeaders(userData.token))
 

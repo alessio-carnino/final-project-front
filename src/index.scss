@@ -231,6 +231,10 @@ a {
   }
 }
 
+.form-label.two-col {
+  grid-column: 1 / 3;
+}
+
 .submit-wrapper {
   grid-column: 1 / 3;
   text-align: end;
@@ -310,9 +314,13 @@ a {
     border-radius: 0.75rem;
     overflow: hidden;
     position: relative;
+    height: 13vw;
+    max-height: 180px;
+
     .card-img {
       width: 100%;
       height: 100%;
+      object-fit: cover;
     }
 
     .gallery-card-top {
@@ -325,6 +333,7 @@ a {
       left: 0;
       padding: $gap-1;
       transition: opacity 0.4s;
+
       .card-title {
         font-weight: 600;
         color: $color-white;
@@ -359,11 +368,29 @@ a {
   background: $color-divider;
 }
 
-.author-component {
+.author-card-component {
   width: 100%;
+  margin-top: $gap-3;
   padding: $gap-5;
   background: $color-grey;
   border-radius: 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $gap-3;
+
+  .author-img {
+    border-radius: 50%;
+    overflow: hidden;
+    aspect-ratio: 1/1;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  // .author-card-content {
+  // }
 }
 
 /* ------------------- Media queries --------------------- */

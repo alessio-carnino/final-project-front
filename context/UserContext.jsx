@@ -23,10 +23,7 @@ export const UseProvider = ({ children }) => {
   const signUp = async (props) => {
     if (loading) return;
 
-    if (password !== repeat_password) {
-      throw new Error(`Passwords don't match`);
-    }
-    const {
+    let {
       first_name,
       last_name,
       user_name,
@@ -36,6 +33,10 @@ export const UseProvider = ({ children }) => {
       profession_title,
       cover_img,
     } = props;
+
+    if (password !== repeat_password) {
+      throw new Error(`Passwords don't match`);
+    }
 
     setError(null);
     setLoading(true);
