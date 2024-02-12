@@ -11,7 +11,8 @@ export default () => {
   const { userData } = useUser();
   const { _id } = useParams();
 
-  const [talent, setTalent] = useState();
+  const [currentUser, setCurrentUser] = useState();
+  console.log(currentUser);
   const [relatedProjects, setRelatedProjects] = useState();
   const [error, setError] = useState(false);
 
@@ -19,8 +20,11 @@ export default () => {
 
   useEffect(() => {
     axios
-      .get(`${VITE_API_URL}/users/${_id}`, axiosHeaders(userData.token))
-      .then((obj) => setTalent(obj.data))
+      .get(
+        `${VITE_API_URL}/users/${userData._id}`,
+        axiosHeaders(userData.token)
+      )
+      .then((obj) => setCurrentUser(obj.data))
       .catch((e) => {
         console.error(e);
         setError(true);
@@ -36,7 +40,7 @@ export default () => {
         setError(e);
         console.error(e);
       });
-  }, [talent]);
+  }, [currentUser]);
 
   return (
     <>
@@ -44,7 +48,7 @@ export default () => {
         <NotFound />
       ) : (
         <>
-          {talent === undefined ? (
+          {currentUser === undefined ? (
             <>
               <div className="align-center">
                 <h3 className="paragraph-L">Loading...</h3>
@@ -56,21 +60,21 @@ export default () => {
                 <div className="container">
                   <div className="talents-header-component">
                     <div className="talents-component-content">
-                      <h1 className="H1">{talent.user_name}</h1>
+                      <h1 className="H1">{currentUser.user_name}</h1>
 
                       <div className="padding-S"></div>
                       <p className="paragraph-L tag">
-                        {talent.profession_title}
+                        {currentUser.profession_title}
                       </p>
-                      <p className="paragraph-L white">{talent.email}</p>
+                      <p className="paragraph-L white">{currentUser.email}</p>
                       <div className="padding-2"></div>
-                      <p>{talent.description}</p>
+                      <p>{currentUser.description}</p>
                     </div>
 
                     <figure className="talents-image-wrapper">
                       <img
                         className="talent-cover"
-                        src={talent.cover_img}
+                        src={currentUser.cover_img}
                         alt="Cover image"
                       />
                     </figure>

@@ -1,4 +1,4 @@
-import { NavLink, Navigate, useNavigate } from "react-router-dom";
+import { NavLink, Navigate, useNavigate, useParams } from "react-router-dom";
 import Homepage from "./Homepage";
 import About from "./About";
 import Projects from "./Projects";
@@ -6,9 +6,11 @@ import Talents from "./Talents";
 import SignUp from "./SignUp";
 import LogIn from "./LogIn";
 import { useUser } from "../../context/UserContext";
+import UserPage from "./UserPage";
 
 export default () => {
   const { userData, logOut } = useUser();
+
   const navigate = useNavigate();
 
   return (
@@ -43,6 +45,14 @@ export default () => {
                 element={<Talents />}
               >
                 Talents
+              </NavLink>
+
+              <NavLink
+                className={"navlink"}
+                to={`/userpage/${userData._id}`} // ???????
+                element={<UserPage />}
+              >
+                <b>User Page</b>
               </NavLink>
 
               <button

@@ -12,6 +12,7 @@ import LogIn from "./components/LogIn";
 import { useUser } from "../context/UserContext";
 import ProjectPage from "./components/ProjectPage";
 import TalentPage from "./components/TalentPage";
+import UserPage from "./components/UserPage";
 
 function App() {
   const { userData } = useUser();
@@ -42,6 +43,8 @@ function App() {
           <Route index element={<Talents />} />
           <Route path={":_id"} element={<TalentPage />} />
         </Route>
+
+        <Route path="/userpage" element={<UserPage />} />
 
         <Route path="/*" element={<NotFound />} />
       </Routes>
