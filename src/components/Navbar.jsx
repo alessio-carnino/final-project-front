@@ -6,7 +6,7 @@ import Talents from "./Talents";
 import SignUp from "./SignUp";
 import LogIn from "./LogIn";
 import { useUser } from "../../context/UserContext";
-import UserPage from "./UserPage";
+import MyProfile from "./MyProfile";
 
 export default () => {
   const { userToken, logOut } = useUser();
@@ -49,10 +49,10 @@ export default () => {
 
               <NavLink
                 className={"navlink"}
-                to={`/userpage`} // ???????
-                element={<UserPage />}
+                to={`/myprofile`} // ???????
+                element={<MyProfile />}
               >
-                <b>User Page</b>
+                My Profile
               </NavLink>
 
               <button

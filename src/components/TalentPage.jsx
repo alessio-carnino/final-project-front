@@ -29,7 +29,7 @@ export default () => {
 
   useEffect(() => {
     axios
-      .get(`${VITE_API_URL}/projects`, axiosHeaders(userToken))
+      .get(`${VITE_API_URL}/projects?userId=${_id}`, axiosHeaders(userToken))
 
       .then((obj) => setRelatedProjects(obj.data))
       .catch((e) => {
@@ -82,20 +82,29 @@ export default () => {
         </>
       )}
 
-      <section className="section header">
-        <div className="container">
-          <div className="align-center">
-            <h1 className="H1">Projects</h1>
-            <div className="padding-3"></div>
-          </div>
-
-          {error ? (
-            <p>{error.message}</p>
+      {error ? (
+        <>
+          <section className="section header">
+            <div className="container">
+              <div className="align-center">
+                <h1 className="H1">Projects</h1>
+                <p>{error.message}</p>
+                <div className="padding-3"></div>
+              </div>
+            </div>
+          </section>
+        </>
+      ) : (
+        <>
+          {relatedProjects === undefined ? (
+            <p>Loading...</p>
           ) : (
-            <>
-              {relatedProjects === undefined ? (
-                <p>Loading...</p>
-              ) : (
+            <section className="section header">
+              <div className="container">
+                <div className="align-center">
+                  <h1 className="H1">Projects</h1>
+                  <div className="padding-3"></div>
+                </div>
                 <div className="gallery-grid">
                   {relatedProjects.map((p, i) => {
                     return (
@@ -116,11 +125,11 @@ export default () => {
                     );
                   })}
                 </div>
-              )}
-            </>
+              </div>
+            </section>
           )}
-        </div>
-      </section>
+        </>
+      )}
     </>
   );
 };

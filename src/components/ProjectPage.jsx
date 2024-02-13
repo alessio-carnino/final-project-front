@@ -13,8 +13,9 @@ export default () => {
 
   const [project, setProject] = useState();
   const [relatedProjects, setRelatedProjects] = useState();
-  console.log({ project, relatedProjects });
   const [error, setError] = useState(false);
+
+  const talentId = project?.user?._id;
 
   const navigate = useNavigate();
 
@@ -29,19 +30,19 @@ export default () => {
   }, []);
 
   useEffect(() => {
-    if (project && project.user && project.user._id) {
+    if (talentId)
       axios
         .get(
-          `${VITE_API_URL}/projects/${project._id}/related`,
+          `${VITE_API_URL}/projects?userId=${talentId}`,
           axiosHeaders(userToken)
         )
+
         .then((obj) => setRelatedProjects(obj.data))
         .catch((e) => {
+          setError(e);
           console.error(e);
-          setError(true);
         });
-    }
-  }, [project]);
+  }, [talentId]);
 
   return (
     <>

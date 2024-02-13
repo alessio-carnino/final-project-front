@@ -8,11 +8,9 @@ import NotFound from "./NotFound";
 const { VITE_API_URL } = import.meta.env;
 
 export default () => {
-  const { userToken } = useUser();
-  const { _id } = useParams();
+  const { userToken, userId } = useUser();
 
   const [currentUser, setCurrentUser] = useState();
-  console.log(userToken);
   const [relatedProjects, setRelatedProjects] = useState();
   const [error, setError] = useState(false);
 
@@ -20,7 +18,7 @@ export default () => {
 
   useEffect(() => {
     axios
-      .get(`${VITE_API_URL}/users/${userToken._id}`, axiosHeaders(userToken))
+      .get(`${VITE_API_URL}/users/${userId}`, axiosHeaders(userToken))
       .then((obj) => setCurrentUser(obj.data))
       .catch((e) => {
         console.error(e);
@@ -28,16 +26,16 @@ export default () => {
       });
   }, []);
 
-  // useEffect(() => {
-  //   axios
-  //     .get(`${VITE_API_URL}/projects`, axiosHeaders(userToken.token))
+  useEffect(() => {
+    axios
+      .get(`${VITE_API_URL}/projects?userId=${userId}`, axiosHeaders(userToken))
 
-  //     .then((obj) => setRelatedProjects(obj.data))
-  //     .catch((e) => {
-  //       setError(e);
-  //       console.error(e);
-  //     });
-  // }, [currentUser]);
+      .then((obj) => setRelatedProjects(obj.data))
+      .catch((e) => {
+        setError(e);
+        console.error(e);
+      });
+  }, [currentUser]);
 
   return (
     <>
@@ -86,7 +84,7 @@ export default () => {
           )}
         </>
       )}
-      {/* 
+
       <section className="section header">
         <div className="container">
           <div className="align-center">
@@ -125,7 +123,7 @@ export default () => {
             </>
           )}
         </div>
-      </section> */}
+      </section>
     </>
   );
 };

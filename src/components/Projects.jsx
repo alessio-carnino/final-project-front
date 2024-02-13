@@ -9,7 +9,6 @@ export default () => {
   const { userToken } = useUser();
 
   const [projects, setProjects] = useState();
-  console.log(projects);
   const [error, setError] = useState(false);
 
   useEffect(() => {
