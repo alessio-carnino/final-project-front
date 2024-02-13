@@ -203,6 +203,9 @@ a {
         background-color: transparent;
         border: 0;
         color: $color-off-white;
+        :hover {
+          opacity: 70%;
+        }
       }
       .active {
         color: $color-accent;
@@ -467,6 +470,50 @@ a {
       .talent-card-title {
         font-weight: 600;
         color: $color-white;
+      }
+    }
+  }
+}
+
+/* ------------------- FOOTER --------------------- */
+
+.section.footer {
+  border-top: 1px solid $color-divider;
+  padding: 5rem 0;
+
+  .footer-top {
+    display: flex;
+    gap: $gap-3;
+    justify-content: center;
+    margin-bottom: $gap-3;
+
+    .foot-link {
+      display: flex;
+      gap: $gap-0-5;
+      :hover {
+        opacity: 70%;
+      }
+    }
+  }
+
+  .footer-bottom {
+    .footer-logo {
+      width: 260px;
+      margin: auto;
+    }
+    .socials-wrapper {
+      margin-top: $gap-3;
+      display: flex;
+      gap: $gap-1;
+      justify-content: center;
+
+      .social-link {
+        background-color: $color-divider;
+        padding: $gap-0-75;
+        border-radius: 50%;
+        :hover {
+          opacity: 80%;
+        }
       }
     }
   }

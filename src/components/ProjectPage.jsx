@@ -27,7 +27,7 @@ export default () => {
         console.error(e);
         setError(true);
       });
-  }, []);
+  }, [_id, userToken]);
 
   useEffect(() => {
     if (talentId)
@@ -42,11 +42,11 @@ export default () => {
           setError(e);
           console.error(e);
         });
-  }, [talentId]);
+  }, [talentId, userToken]);
 
   return (
     <>
-      <section className="section header">
+      <section id="project-header" className="section header">
         <div className="container small">
           {error ? (
             <NotFound />
@@ -103,7 +103,7 @@ export default () => {
                       <div className="padding-1"></div>
                       <p>{project.user.description_preview}</p>
                       <div className="padding-2"></div>
-                      <Link to={`/users/${project.user._id}`}>
+                      <Link to={`/talents/${project.user._id}`}>
                         <button className="button">Learn More</button>
                       </Link>
                     </div>
@@ -138,6 +138,9 @@ export default () => {
                         key={`project-${i}`}
                         className="gallery-card"
                         to={`/projects/${p._id}`}
+                        onClick={() => {
+                          window.scrollTo({ top: 0, behavior: "smooth" });
+                        }}
                       >
                         <img
                           className="card-img"
