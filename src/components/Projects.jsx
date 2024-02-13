@@ -6,7 +6,7 @@ import { axiosHeaders } from "../../libraries/utilitites";
 const { VITE_API_URL } = import.meta.env;
 
 export default () => {
-  const { userData } = useUser();
+  const { userToken } = useUser();
 
   const [projects, setProjects] = useState();
   console.log(projects);
@@ -14,7 +14,7 @@ export default () => {
 
   useEffect(() => {
     axios
-      .get(`${VITE_API_URL}/projects`, axiosHeaders(userData.token))
+      .get(`${VITE_API_URL}/projects`, axiosHeaders(userToken))
 
       .then((obj) => setProjects(obj.data))
       .catch((e) => {

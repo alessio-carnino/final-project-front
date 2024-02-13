@@ -4,7 +4,7 @@ import { useUser } from "../../context/UserContext";
 import Projects from "./Projects";
 
 export default () => {
-  const { userData } = useUser();
+  const { userToken } = useUser();
 
   return (
     <>
@@ -24,7 +24,7 @@ export default () => {
                 something extraordinary together!{" "}
               </p>
               <div className="padding-2"></div>
-              {userData ? (
+              {userToken ? (
                 <Link to={"/projects"} element={<Projects />}>
                   <button className="button">Get Inspired</button>
                 </Link>

@@ -5,16 +5,18 @@ const { VITE_API_URL } = import.meta.env;
 const UserContext = createContext();
 
 export const UseProvider = ({ children }) => {
-  const storedData = localStorage.getItem("data");
+  const storedUserToken = localStorage.getItem("userToken");
+  const [userToken, setUserToken] = useState(storedUserToken);
 
-  const [userData, setUserData] = useState(
-    storedData ? JSON.parse(storedData) : null
-  );
+  const storedUserId = localStorage.getItem("userId");
+  const [userId, setUserId] = useState(storedUserId);
 
   // not sure about this (???)
   const changeData = (newData) => {
-    setUserData(newData);
-    localStorage.setItem("data", JSON.stringify(newData));
+    setUserToken(newData ? newData.token : null);
+    localStorage.setItem("userToken", newData ? newData.token : null);
+    setUserId(newData ? newData.userId : null);
+    localStorage.setItem("userId", newData ? newData.userId : null);
   };
 
   const [error, setError] = useState(null);
@@ -92,7 +94,8 @@ export const UseProvider = ({ children }) => {
   };
 
   const value = {
-    userData,
+    userToken,
+    userId,
     logOut,
     logIn,
     signUp,

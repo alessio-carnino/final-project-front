@@ -5,7 +5,7 @@ import SignUp from "./SignUp";
 import { Link } from "react-router-dom";
 
 export default () => {
-  const { userData } = useUser();
+  const { userToken } = useUser();
 
   return (
     <>
@@ -24,7 +24,7 @@ export default () => {
                 connect with a vibrant community, and let your creativity soar.
               </p>
               <div className="buttons-wrapper">
-                {userData ? (
+                {userToken ? (
                   <>
                     <Link to={"/projects"} element={<Projects />}>
                       <button className="button">Get Inspired</button>

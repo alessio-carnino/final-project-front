@@ -6,7 +6,7 @@ import { axiosHeaders } from "../../libraries/utilitites";
 const { VITE_API_URL } = import.meta.env;
 
 export default () => {
-  const { userData } = useUser();
+  const { userToken } = useUser();
 
   const [users, setUsers] = useState();
   console.log(users);
@@ -14,7 +14,7 @@ export default () => {
 
   useEffect(() => {
     axios
-      .get(`${VITE_API_URL}/users`, axiosHeaders(userData.token))
+      .get(`${VITE_API_URL}/users`, axiosHeaders(userToken))
 
       .then((obj) => setUsers(obj.data))
       .catch((e) => {

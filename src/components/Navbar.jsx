@@ -9,7 +9,7 @@ import { useUser } from "../../context/UserContext";
 import UserPage from "./UserPage";
 
 export default () => {
-  const { userData, logOut } = useUser();
+  const { userToken, logOut } = useUser();
 
   const navigate = useNavigate();
 
@@ -30,7 +30,7 @@ export default () => {
             About
           </NavLink>
 
-          {userData ? (
+          {userToken ? (
             <>
               <NavLink
                 className={"navlink"}
@@ -49,7 +49,7 @@ export default () => {
 
               <NavLink
                 className={"navlink"}
-                to={`/userpage/${userData._id}`} // ???????
+                to={`/userpage`} // ???????
                 element={<UserPage />}
               >
                 <b>User Page</b>

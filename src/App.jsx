@@ -13,9 +13,10 @@ import { useUser } from "../context/UserContext";
 import ProjectPage from "./components/ProjectPage";
 import TalentPage from "./components/TalentPage";
 import UserPage from "./components/UserPage";
+import Footer from "./components/Footer";
 
 function App() {
-  const { userData } = useUser();
+  const { userToken } = useUser();
 
   return (
     <>
@@ -27,19 +28,19 @@ function App() {
 
         <Route
           path="/signup"
-          element={userData ? <Navigate to="/" /> : <SignUp />}
+          element={userToken ? <Navigate to="/" /> : <SignUp />}
         />
         <Route
           path="/login"
-          element={!userData ? <LogIn /> : <Navigate to="/" />}
+          element={!userToken ? <LogIn /> : <Navigate to="/" />}
         />
 
-        <Route path="/projects" element={userData ? <Outlet /> : <LogIn />}>
+        <Route path="/projects" element={userToken ? <Outlet /> : <LogIn />}>
           <Route index element={<Projects />} />
           <Route path={":_id"} element={<ProjectPage />} />
         </Route>
 
-        <Route path="/talents" element={userData ? <Outlet /> : <LogIn />}>
+        <Route path="/talents" element={userToken ? <Outlet /> : <LogIn />}>
           <Route index element={<Talents />} />
           <Route path={":_id"} element={<TalentPage />} />
         </Route>
@@ -48,6 +49,8 @@ function App() {
 
         <Route path="/*" element={<NotFound />} />
       </Routes>
+
+      <Footer />
     </>
   );
 }

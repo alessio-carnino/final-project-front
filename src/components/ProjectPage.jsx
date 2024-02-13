@@ -8,7 +8,7 @@ import NotFound from "./NotFound";
 const { VITE_API_URL } = import.meta.env;
 
 export default () => {
-  const { userData } = useUser();
+  const { userToken } = useUser();
   const { _id } = useParams();
 
   const [project, setProject] = useState();
@@ -20,7 +20,7 @@ export default () => {
 
   useEffect(() => {
     axios
-      .get(`${VITE_API_URL}/projects/${_id}`, axiosHeaders(userData.token))
+      .get(`${VITE_API_URL}/projects/${_id}`, axiosHeaders(userToken))
       .then((obj) => setProject(obj.data))
       .catch((e) => {
         console.error(e);
@@ -33,7 +33,7 @@ export default () => {
       axios
         .get(
           `${VITE_API_URL}/projects/${project._id}/related`,
-          axiosHeaders(userData.token)
+          axiosHeaders(userToken)
         )
         .then((obj) => setRelatedProjects(obj.data))
         .catch((e) => {

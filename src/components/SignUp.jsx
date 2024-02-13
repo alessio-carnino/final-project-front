@@ -3,7 +3,7 @@ import { useUser } from "../../context/UserContext";
 import { useNavigate } from "react-router-dom";
 
 export default () => {
-  const { signUp, error, loading, userData } = useUser();
+  const { signUp, error, loading, userToken } = useUser();
 
   const [formData, setFormData] = useState({
     first_name: "",
@@ -26,10 +26,10 @@ export default () => {
   };
 
   useEffect(() => {
-    if (userData !== null) {
+    if (userToken !== null) {
       navigate("/");
     }
-  }, [userData]);
+  }, [userToken]);
 
   return (
     <>

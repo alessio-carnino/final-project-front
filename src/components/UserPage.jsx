@@ -8,11 +8,11 @@ import NotFound from "./NotFound";
 const { VITE_API_URL } = import.meta.env;
 
 export default () => {
-  const { userData } = useUser();
+  const { userToken } = useUser();
   const { _id } = useParams();
 
   const [currentUser, setCurrentUser] = useState();
-  console.log(currentUser);
+  console.log(userToken);
   const [relatedProjects, setRelatedProjects] = useState();
   const [error, setError] = useState(false);
 
@@ -20,10 +20,7 @@ export default () => {
 
   useEffect(() => {
     axios
-      .get(
-        `${VITE_API_URL}/users/${userData._id}`,
-        axiosHeaders(userData.token)
-      )
+      .get(`${VITE_API_URL}/users/${userToken._id}`, axiosHeaders(userToken))
       .then((obj) => setCurrentUser(obj.data))
       .catch((e) => {
         console.error(e);
@@ -31,16 +28,16 @@ export default () => {
       });
   }, []);
 
-  useEffect(() => {
-    axios
-      .get(`${VITE_API_URL}/projects`, axiosHeaders(userData.token))
+  // useEffect(() => {
+  //   axios
+  //     .get(`${VITE_API_URL}/projects`, axiosHeaders(userToken.token))
 
-      .then((obj) => setRelatedProjects(obj.data))
-      .catch((e) => {
-        setError(e);
-        console.error(e);
-      });
-  }, [currentUser]);
+  //     .then((obj) => setRelatedProjects(obj.data))
+  //     .catch((e) => {
+  //       setError(e);
+  //       console.error(e);
+  //     });
+  // }, [currentUser]);
 
   return (
     <>
@@ -67,7 +64,7 @@ export default () => {
                         {currentUser.profession_title}
                       </p>
                       <p className="paragraph-L white">{currentUser.email}</p>
-                      <div className="padding-2"></div>
+                      <div className="padding-1"></div>
                       <p>{currentUser.description}</p>
                     </div>
 
@@ -79,13 +76,17 @@ export default () => {
                       />
                     </figure>
                   </div>
+
+                  <div className="align-center">
+                    <button className="button">Edit Profile</button>
+                  </div>
                 </div>
               </section>
             </>
           )}
         </>
       )}
-
+      {/* 
       <section className="section header">
         <div className="container">
           <div className="align-center">
@@ -124,7 +125,7 @@ export default () => {
             </>
           )}
         </div>
-      </section>
+      </section> */}
     </>
   );
 };

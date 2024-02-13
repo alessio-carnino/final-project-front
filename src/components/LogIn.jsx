@@ -3,7 +3,7 @@ import { useUser } from "../../context/UserContext";
 import { useNavigate } from "react-router-dom";
 
 export default () => {
-  const { logIn, error, loading, userData } = useUser();
+  const { logIn, error, loading, userToken } = useUser();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -18,10 +18,10 @@ export default () => {
   };
 
   useEffect(() => {
-    if (userData !== null) {
+    if (userToken !== null) {
       navigate("/");
     }
-  }, [userData]);
+  }, [userToken]);
   return (
     <>
       <section className="section header">
