@@ -342,7 +342,7 @@ a {
 
     .gallery-card-top {
       opacity: 0%;
-      background-color: #00000060;
+      background-color: #00000080;
       width: 100%;
       height: 100%;
       position: absolute;
@@ -350,8 +350,17 @@ a {
       left: 0;
       padding: $gap-1;
       transition: opacity 0.4s;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
 
       .card-title {
+        font-weight: 600;
+        color: $color-white;
+        font-size: $font-size-22;
+      }
+
+      .card-user {
         font-weight: 600;
         color: $color-white;
       }
@@ -361,6 +370,14 @@ a {
       }
     }
   }
+}
+
+.pagination {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $gap-1;
+  margin-top: $gap-3;
 }
 
 /* ------------------- SINGLE PROJECT --------------------- */

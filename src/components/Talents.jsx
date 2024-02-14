@@ -3,25 +3,37 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useUser } from "../../context/UserContext";
 import { axiosHeaders } from "../../libraries/utilitites";
+import MyProfile from "./MyProfile";
 const { VITE_API_URL } = import.meta.env;
 
 export default () => {
-  const { userToken } = useUser();
+  const { userToken, userId } = useUser();
 
   const [users, setUsers] = useState();
-  console.log(users);
   const [error, setError] = useState(false);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
     axios
-      .get(`${VITE_API_URL}/users`, axiosHeaders(userToken))
-
-      .then((obj) => setUsers(obj.data))
+      .get(`${VITE_API_URL}/users?page=${page}`, axiosHeaders(userToken))
+      .then((response) => {
+        setUsers(response.data.users);
+        setTotalPages(response.data.totalPages);
+      })
       .catch((e) => {
-        setError(e);
+        setError(e.message);
         console.error(e);
       });
-  }, []);
+  }, [page, userToken]);
+
+  const handleNextPage = () => {
+    setPage(page + 1);
+  };
+
+  const handlePrevPage = () => {
+    setPage(page - 1);
+  };
 
   return (
     <>
@@ -62,27 +74,55 @@ export default () => {
               {users === undefined ? (
                 <p>Loading...</p>
               ) : (
-                <div className="talents-grid">
-                  {users.map((u, i) => {
-                    return (
-                      <Link
-                        key={`talent-${i}`}
-                        className="talent-card"
-                        to={`/talents/${u._id}`}
+                <>
+                  <div className="talents-grid">
+                    {users.map((u, i) => {
+                      return (
+                        <Link
+                          key={`talent-${i}`}
+                          className="talent-card"
+                          to={
+                            u._id === userId
+                              ? `/myprofile`
+                              : `/talents/${u._id}`
+                          }
+                          element={<MyProfile />}
+                        >
+                          <img
+                            className="talent-card-img"
+                            src={u.cover_img}
+                            alt="talent cover"
+                          />
+                          <div className="talent-card-info">
+                            <h3 className="paragraph-L">{u.user_name}</h3>
+                            <p>{u.profession_title}</p>
+                          </div>
+                        </Link>
+                      );
+                    })}
+                  </div>
+
+                  {/* PAGINATION -------------- */}
+                  <div className="pagination">
+                    <span>{`Page ${page} of ${totalPages}`}</span>
+                    <div className="buttons-wrapper">
+                      <button
+                        className="button secondary"
+                        onClick={handlePrevPage}
+                        disabled={page === 1}
                       >
-                        <img
-                          className="talent-card-img"
-                          src={u.cover_img}
-                          alt="talent cover"
-                        />
-                        <div className="talent-card-info">
-                          <h3 className="paragraph-L">{u.user_name}</h3>
-                          <p>{u.profession_title}</p>
-                        </div>
-                      </Link>
-                    );
-                  })}
-                </div>
+                        Prev
+                      </button>
+                      <button
+                        className="button secondary"
+                        onClick={handleNextPage}
+                        disabled={page === totalPages}
+                      >
+                        Next
+                      </button>
+                    </div>
+                  </div>
+                </>
               )}
             </>
           )}

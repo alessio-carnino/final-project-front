@@ -4,6 +4,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useUser } from "../../context/UserContext";
 import { axiosHeaders } from "../../libraries/utilitites";
 import NotFound from "./NotFound";
+import MyProfile from "./MyProfile";
 
 const { VITE_API_URL } = import.meta.env;
 
@@ -128,7 +129,7 @@ export default () => {
                             Edit Project
                           </button>
 
-                          {/* DELETE BUTTON AND CONFIRMATION MODAL */}
+                          {/* DELETE BUTTON  */}
                           <button
                             className="button secondary"
                             onClick={() => {
@@ -167,7 +168,7 @@ export default () => {
 
                           <form className="sign-form">
                             <label className="form-label">
-                              Project Title *
+                              Project Title
                               <input
                                 type="text"
                                 value={formDataProject.title}
@@ -181,7 +182,7 @@ export default () => {
                             </label>
 
                             <label className="form-label">
-                              Description *
+                              Description
                               <input
                                 type="text"
                                 value={formDataProject.description}
@@ -209,7 +210,7 @@ export default () => {
                             </label>
 
                             <label className="form-label">
-                              Cover Image *
+                              Cover Image
                               <input
                                 type="text"
                                 value={formDataProject.cover_img}
@@ -304,14 +305,28 @@ export default () => {
                   ) : null}
                   {talentId === userId ? (
                     <>
-                      {" "}
                       <div className="align-center">
-                        <button
-                          className="button"
-                          onClick={() => setOpenModalProject(true)}
-                        >
-                          Edit Project
-                        </button>
+                        <div className="padding-3"></div>
+                        <div className="buttons-wrapper center">
+                          <button
+                            className="button"
+                            onClick={() => setOpenModalProject(true)}
+                          >
+                            Edit Project
+                          </button>
+
+                          {/* DELETE BUTTON  */}
+                          <button
+                            className="button secondary"
+                            onClick={() => {
+                              deleteProject(project._id);
+                              navigate("/projects");
+                            }}
+                          >
+                            Delete Project
+                          </button>
+                        </div>
+
                         <div className="padding-3"></div>
                       </div>
                     </>
@@ -335,7 +350,14 @@ export default () => {
                       <div className="padding-1"></div>
                       <p>{project.user.description_preview}</p>
                       <div className="padding-2"></div>
-                      <Link to={`/talents/${project.user._id}`}>
+                      <Link
+                        to={
+                          talentId === userId
+                            ? `/myprofile`
+                            : `/talents/${project.user._id}`
+                        }
+                        element={<MyProfile />}
+                      >
                         <button className="button">Learn More</button>
                       </Link>
                     </div>
