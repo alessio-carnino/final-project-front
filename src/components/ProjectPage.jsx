@@ -377,8 +377,11 @@ export default () => {
               : "Loading..."}
           </h2>
           <div className="padding-3"></div>
+          <h1>
+            relatedProject da mettere a posto. CREDO sia dovuto alla paginazione
+          </h1>
 
-          {error ? (
+          {/* {error ? (
             <p>{error.message}</p>
           ) : (
             <>
@@ -410,7 +413,7 @@ export default () => {
                 </div>
               )}
             </>
-          )}
+          )} */}
         </div>
       </section>
     </>

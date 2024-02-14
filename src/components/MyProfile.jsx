@@ -335,7 +335,12 @@ export default () => {
             <p>{error.message}</p>
           ) : (
             <>
-              {relatedProjects === undefined ? (
+              <h1>
+                relatedProject da mettere a posto. CREDO sia dovuto alla
+                paginazione
+              </h1>
+
+              {/* {relatedProjects === undefined ? (
                 <p>Loading...</p>
               ) : (
                 <>
@@ -364,7 +369,7 @@ export default () => {
                     })}
                   </div>
                 </>
-              )}
+              )} */}
             </>
           )}
 

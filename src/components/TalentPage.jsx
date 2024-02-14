@@ -96,7 +96,10 @@ export default () => {
         </>
       ) : (
         <>
-          {relatedProjects === undefined ? (
+          <h1>
+            relatedProject da mettere a posto. CREDO sia dovuto alla paginazione
+          </h1>
+          {/* {relatedProjects === undefined ? (
             <p>Loading...</p>
           ) : (
             <section className="section header">
@@ -127,7 +130,7 @@ export default () => {
                 </div>
               </div>
             </section>
-          )}
+          )} */}
         </>
       )}
     </>
