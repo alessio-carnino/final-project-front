@@ -8,7 +8,7 @@ import NotFound from "./NotFound";
 const { VITE_API_URL } = import.meta.env;
 
 export default () => {
-  const { userToken } = useUser();
+  const { userToken, userId } = useUser();
   const { _id } = useParams();
 
   const [project, setProject] = useState();
@@ -16,6 +16,21 @@ export default () => {
   const [error, setError] = useState(false);
 
   const talentId = project?.user?._id;
+
+  // Modal to edit Project
+  const [openModalProject, setOpenModalProject] = useState(false);
+  const blankFormProject = {
+    title: "",
+    description: "",
+    description2: "",
+    cover_img: "",
+    img1: "",
+    img2: "",
+  };
+  const [formDataProject, setFormDataProject] = useState(blankFormProject);
+
+  const [feedback, setFeedback] = useState();
+  const [refresh, setRefresh] = useState(false);
 
   const navigate = useNavigate();
 
@@ -44,6 +59,31 @@ export default () => {
         });
   }, [talentId, userToken]);
 
+  const editProject = (newProps) => {
+    const validProps = {};
+    Object.entries(newProps).forEach(([key, value]) => {
+      if (value !== "" && value !== undefined) {
+        validProps[key] = value;
+      }
+    });
+    if (Object.keys(validProps).length > 0) {
+      axios
+        .patch(
+          `${VITE_API_URL}/projects/${project._id}`,
+          validProps,
+          axiosHeaders(userToken)
+        )
+        .then((obj) => {
+          setFeedback("Project updated successfully");
+          setRefresh(!refresh);
+        })
+        .catch((e) => {
+          setFeedback("Please insert valid data");
+          console.error(e.message);
+        });
+    }
+  };
+
   return (
     <>
       <section id="project-header" className="section header">
@@ -60,6 +100,146 @@ export default () => {
                 </>
               ) : (
                 <>
+                  {/* MODAL FORM TO EDIT PROJECT -------------------- */}
+                  {userId === talentId ? (
+                    <>
+                      <div className="align-center">
+                        <button
+                          className="button"
+                          onClick={() => setOpenModalProject(true)}
+                        >
+                          Edit Project
+                        </button>
+                        <div className="padding-3"></div>
+                      </div>
+                      <div
+                        className={
+                          openModalProject === true
+                            ? "modal-open"
+                            : "modal-close"
+                        }
+                      >
+                        <button
+                          className="close-layer"
+                          onClick={() => setOpenModalProject(false)}
+                        ></button>
+                        <div className="modal-content">
+                          <button onClick={() => setOpenModalProject(false)}>
+                            <img
+                              className="close"
+                              src="https://uploads-ssl.webflow.com/6389024564c0eaae543c5b10/65cb808a2a6c988cbfde18da_close.svg"
+                              alt="close icon"
+                            />
+                          </button>
+
+                          <h3 className="H3">Edit project</h3>
+                          <div className="padding-2"></div>
+
+                          <form className="sign-form">
+                            <label className="form-label">
+                              Project Title *
+                              <input
+                                type="text"
+                                value={formDataProject.title}
+                                onChange={(e) => {
+                                  setFormDataProject({
+                                    ...formDataProject,
+                                    title: e.target.value,
+                                  });
+                                }}
+                              />
+                            </label>
+
+                            <label className="form-label">
+                              Description *
+                              <input
+                                type="text"
+                                value={formDataProject.description}
+                                onChange={(e) => {
+                                  setFormDataProject({
+                                    ...formDataProject,
+                                    description: e.target.value,
+                                  });
+                                }}
+                              />
+                            </label>
+
+                            <label className="form-label">
+                              Description Part 2
+                              <input
+                                type="text"
+                                value={formDataProject.description2}
+                                onChange={(e) => {
+                                  setFormDataProject({
+                                    ...formDataProject,
+                                    description2: e.target.value,
+                                  });
+                                }}
+                              />
+                            </label>
+
+                            <label className="form-label">
+                              Cover Image *
+                              <input
+                                type="text"
+                                value={formDataProject.cover_img}
+                                onChange={(e) => {
+                                  setFormDataProject({
+                                    ...formDataProject,
+                                    cover_img: e.target.value,
+                                  });
+                                }}
+                              />
+                            </label>
+
+                            <label className="form-label">
+                              Image 1
+                              <input
+                                type="text"
+                                value={formDataProject.img1}
+                                onChange={(e) => {
+                                  setFormDataProject({
+                                    ...formDataProject,
+                                    img1: e.target.value,
+                                  });
+                                }}
+                              />
+                            </label>
+
+                            <label className="form-label">
+                              Image 2
+                              <input
+                                type="text"
+                                value={formDataProject.img2}
+                                onChange={(e) => {
+                                  setFormDataProject({
+                                    ...formDataProject,
+                                    img2: e.target.value,
+                                  });
+                                }}
+                              />
+                            </label>
+
+                            <div className="submit-wrapper">
+                              <button
+                                className="button"
+                                onClick={() => {
+                                  editProject(formDataProject);
+                                  setFormDataProject(blankFormProject);
+                                }}
+                              >
+                                Submit
+                              </button>
+                            </div>
+                            {error && (
+                              <p className="paragraph-L">{error.message}</p>
+                            )}
+                          </form>
+                        </div>
+                      </div>
+                    </>
+                  ) : null}
+
                   <div className="align-center">
                     <h1 className="H1">{project.title}</h1>
                     <div className="padding-S "></div>
@@ -67,7 +247,7 @@ export default () => {
                     <div className="padding-2 "></div>
                   </div>
                   <div className="project-info">
-                    <p>DATE</p>
+                    <p>{project.user.user_name}</p>
                     <p>LIKES</p>
                   </div>
                   <div className="padding-1 "></div>
@@ -75,15 +255,37 @@ export default () => {
                     <img src={project.cover_img} alt="cover image" />
                   </figure>
                   <p>{project.description}</p>
-                  <div className="padding-3 "></div>
-                  <figure className="project-img-wrapper">
-                    <img src={project.img1} alt="cover image" />
-                  </figure>
+                  {project.img1 ? (
+                    <>
+                      <div className="padding-3 "></div>
+                      <figure className="project-img-wrapper">
+                        <img src={project.img1} alt="cover image" />
+                      </figure>
+                    </>
+                  ) : null}
                   <p>{project.description2}</p>
-                  <div className="padding-3 "></div>
-                  <figure className="project-img-wrapper">
-                    <img src={project.img2} alt="cover image" />
-                  </figure>
+                  {project.img2 ? (
+                    <>
+                      <div className="padding-3 "></div>
+                      <figure className="project-img-wrapper">
+                        <img src={project.img2} alt="cover image" />
+                      </figure>
+                    </>
+                  ) : null}
+                  {talentId === userId ? (
+                    <>
+                      {" "}
+                      <div className="align-center">
+                        <button
+                          className="button"
+                          onClick={() => setOpenModalProject(true)}
+                        >
+                          Edit Project
+                        </button>
+                        <div className="padding-3"></div>
+                      </div>
+                    </>
+                  ) : null}
                   <div className="padding-3 "></div>
                   <div className="divider"></div>
                   <div className="padding-3 "></div>
@@ -96,9 +298,9 @@ export default () => {
                     </figure>
 
                     <div className="author-card-content">
-                      <h2 className="H2">{project.user.user_name}</h2>
+                      <h2 className="H3">{project.user.user_name}</h2>
                       <p className="paragraph-L">
-                        {project.user?.profession_title}
+                        {project.user.profession_title}
                       </p>
                       <div className="padding-1"></div>
                       <p>{project.user.description_preview}</p>
