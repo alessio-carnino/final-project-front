@@ -84,6 +84,22 @@ export default () => {
     }
   };
 
+  const deleteProject = (id) => {
+    axios
+      .delete(
+        `${VITE_API_URL}/projects/${project._id}`,
+        axiosHeaders(userToken)
+      )
+      .then(() => {
+        setFeedback("Project deleted successfully");
+        setRefresh(!refresh);
+      })
+      .catch((e) => {
+        setError(e);
+        console.error(e.message);
+      });
+  };
+
   return (
     <>
       <section id="project-header" className="section header">
@@ -104,12 +120,26 @@ export default () => {
                   {userId === talentId ? (
                     <>
                       <div className="align-center">
-                        <button
-                          className="button"
-                          onClick={() => setOpenModalProject(true)}
-                        >
-                          Edit Project
-                        </button>
+                        <div className="buttons-wrapper center">
+                          <button
+                            className="button"
+                            onClick={() => setOpenModalProject(true)}
+                          >
+                            Edit Project
+                          </button>
+
+                          {/* DELETE BUTTON AND CONFIRMATION MODAL */}
+                          <button
+                            className="button secondary"
+                            onClick={() => {
+                              deleteProject(project._id);
+                              navigate("/projects");
+                            }}
+                          >
+                            Delete Project
+                          </button>
+                        </div>
+
                         <div className="padding-3"></div>
                       </div>
                       <div

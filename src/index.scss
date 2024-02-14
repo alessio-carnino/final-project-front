@@ -177,6 +177,9 @@ a {
   display: flex;
   gap: $gap-1-5;
 }
+.buttons-wrapper.center {
+  justify-content: center;
+}
 
 /* ------------------- Navbar --------------------- */
 
