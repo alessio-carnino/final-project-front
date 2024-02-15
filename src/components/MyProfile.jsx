@@ -4,6 +4,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useUser } from "../../context/UserContext";
 import { axiosHeaders } from "../../libraries/utilitites";
 import NotFound from "./NotFound";
+import GridProjects from "./GridProjects";
 
 const { VITE_API_URL } = import.meta.env;
 
@@ -13,6 +14,8 @@ export default () => {
   const [currentUser, setCurrentUser] = useState();
   const [relatedProjects, setRelatedProjects] = useState();
   const [error, setError] = useState(false);
+  const [totalPages, setTotalPages] = useState(1);
+  const [page, setPage] = useState(1);
 
   // Modal to edit User Profile
   const [openModalProfile, setOpenModalProfile] = useState(false);
@@ -40,9 +43,9 @@ export default () => {
     img1: "",
     img2: "",
     user: { userId },
+    categories: [],
   };
   const [formDataProject, setFormDataProject] = useState(blankFormProject);
-
   const [feedback, setFeedback] = useState();
   const [refresh, setRefresh] = useState(false);
 
@@ -58,16 +61,23 @@ export default () => {
       });
   }, []);
 
+  // CALL TO PROJECTS FROM THE SAME USER ----------
   useEffect(() => {
     axios
-      .get(`${VITE_API_URL}/projects?userId=${userId}`, axiosHeaders(userToken))
+      .get(
+        `${VITE_API_URL}/projects?userId=${userId}&page=${page}`,
+        axiosHeaders(userToken)
+      )
 
-      .then((obj) => setRelatedProjects(obj.data))
+      .then((response) => {
+        setRelatedProjects(response.data.projects);
+        setTotalPages(response.data.totalPages);
+      })
       .catch((e) => {
         setError(e);
         console.error(e);
       });
-  }, [currentUser]);
+  }, [page, currentUser]);
 
   const addProject = (body) => {
     axios
@@ -81,6 +91,19 @@ export default () => {
         console.error(e);
       });
   };
+
+  // CATEGORIES -------------------
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(`${VITE_API_URL}/categories`, axiosHeaders(userToken))
+      .then((obj) => setCategories(obj.data))
+      .catch((e) => {
+        setError(e);
+        console.error(e);
+      });
+  }, [userToken]);
 
   return (
     <>
@@ -96,6 +119,7 @@ export default () => {
             </>
           ) : (
             <>
+              <h1>FIX RADIO IN ADD NEW PROJECT MODAL</h1>
               <section className="section header">
                 <div className="container">
                   <div className="talents-header-component">
@@ -126,6 +150,7 @@ export default () => {
                         </button>
                       </div>
 
+                      {/* MODAL Edit your profile  */}
                       <div
                         className={
                           openModalProfile === true
@@ -335,12 +360,7 @@ export default () => {
             <p>{error.message}</p>
           ) : (
             <>
-              <h1>
-                relatedProject da mettere a posto. CREDO sia dovuto alla
-                paginazione
-              </h1>
-
-              {/* {relatedProjects === undefined ? (
+              {relatedProjects === undefined ? (
                 <p>Loading...</p>
               ) : (
                 <>
@@ -348,28 +368,14 @@ export default () => {
                     <h2 className="H2">Your Projects</h2>
                     <div className="padding-3"></div>
                   </div>
-                  <div className="gallery-grid">
-                    {relatedProjects.map((p, i) => {
-                      return (
-                        <Link
-                          key={`project-${i}`}
-                          className="gallery-card"
-                          to={`/projects/${p._id}`}
-                        >
-                          <img
-                            className="card-img"
-                            src={p.cover_img}
-                            alt="project cover"
-                          />
-                          <div className="gallery-card-top">
-                            <p className="card-title">{p.title}</p>
-                          </div>
-                        </Link>
-                      );
-                    })}
-                  </div>
+                  <GridProjects
+                    projects={relatedProjects}
+                    page={page}
+                    totalPages={totalPages}
+                    setPage={setPage}
+                  />
                 </>
-              )} */}
+              )}
             </>
           )}
 
@@ -383,6 +389,8 @@ export default () => {
               Create New Project
             </button>
           </div>
+
+          {/* MODAL NEW PROJECT */}
           <div
             className={openModalProject === true ? "modal-open" : "modal-close"}
           >
@@ -485,6 +493,31 @@ export default () => {
                       });
                     }}
                   />
+                </label>
+
+                <label className="form-labe two-col">
+                  Categories
+                  <div className="radio-wrapper">
+                    {categories.map((c) => (
+                      <label key={c._id}>
+                        <input
+                          className="radio"
+                          type="radio"
+                          name={`category_${c._id}`}
+                          value={c._id}
+                          checked={formDataProject.categories === c._id}
+                          onChange={(e) => {
+                            const selectedCategoryId = parseInt(e.target.value);
+                            setFormDataProject({
+                              ...formDataProject,
+                              categories: selectedCategoryId,
+                            });
+                          }}
+                        />
+                        {c.category_name}
+                      </label>
+                    ))}
+                  </div>
                 </label>
 
                 <div className="submit-wrapper">

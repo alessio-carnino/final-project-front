@@ -11,12 +11,19 @@ export default () => {
 
   const [projects, setProjects] = useState();
   const [error, setError] = useState(false);
-  const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [page, setPage] = useState(1);
+  const [categories, setCategories] = useState();
+  const [selectCategory, setSelectedCategory] = useState(null);
 
   useEffect(() => {
+    let url = `${VITE_API_URL}/projects?page=${page}`;
+    if (selectCategory) {
+      url += `&category=${selectCategory}`;
+    }
+    console.log(url);
     axios
-      .get(`${VITE_API_URL}/projects?page=${page}`, axiosHeaders(userToken))
+      .get(url, axiosHeaders(userToken))
       .then((response) => {
         setProjects(response.data.projects);
         setTotalPages(response.data.totalPages);
@@ -25,14 +32,22 @@ export default () => {
         setError(e);
         console.error(e);
       });
-  }, [page, userToken]);
+  }, [selectCategory, page, userToken]);
 
-  const handleNextPage = () => {
-    setPage(page + 1);
-  };
+  // CATEGORIES -------------------
+  useEffect(() => {
+    axios
+      .get(`${VITE_API_URL}/categories`, axiosHeaders(userToken))
+      .then((obj) => setCategories(obj.data))
+      .catch((e) => {
+        setError(e);
+        console.error(e);
+      });
+  }, [userToken]);
 
-  const handlePrevPage = () => {
-    setPage(page - 1);
+  const handleCategoryClick = (categoryId) => {
+    setSelectedCategory(categoryId);
+    setPage(1);
   };
 
   return (
@@ -51,11 +66,36 @@ export default () => {
               {projects === undefined ? (
                 <p>Loading...</p>
               ) : (
-                <GridProjects
-                  projects={projects}
-                  page={page}
-                  totalPages={totalPages}
-                />
+                <>
+                  {/* CATEGORIES ------------------- */}
+                  <div className="categories-wrapper">
+                    <menu className="categories-component">
+                      <div className="fade-left"></div>
+                      <div className="fade-right"></div>
+
+                      {categories.map((c, i) => {
+                        return (
+                          <button
+                            key={c._id}
+                            className="button category"
+                            onClick={() => {
+                              handleCategoryClick(c._id);
+                            }}
+                          >
+                            {c.category_name}
+                          </button>
+                        );
+                      })}
+                    </menu>
+                  </div>
+
+                  <GridProjects
+                    projects={projects}
+                    page={page}
+                    totalPages={totalPages}
+                    setPage={setPage}
+                  />
+                </>
               )}
             </>
           )}

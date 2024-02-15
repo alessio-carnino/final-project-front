@@ -5,6 +5,7 @@ import { useUser } from "../../context/UserContext";
 import { axiosHeaders } from "../../libraries/utilitites";
 import NotFound from "./NotFound";
 import MyProfile from "./MyProfile";
+import GridProjects from "./GridProjects";
 
 const { VITE_API_URL } = import.meta.env;
 
@@ -15,6 +16,8 @@ export default () => {
   const [project, setProject] = useState();
   const [relatedProjects, setRelatedProjects] = useState();
   const [error, setError] = useState(false);
+  const [totalPages, setTotalPages] = useState(1);
+  const [page, setPage] = useState(1);
 
   const talentId = project?.user?._id;
 
@@ -35,6 +38,7 @@ export default () => {
 
   const navigate = useNavigate();
 
+  // CALL TO CURRENT PROJECT ----------
   useEffect(() => {
     axios
       .get(`${VITE_API_URL}/projects/${_id}`, axiosHeaders(userToken))
@@ -45,20 +49,24 @@ export default () => {
       });
   }, [_id, userToken]);
 
+  // CALL TO PROJECTS FROM THE SAME USER ----------
   useEffect(() => {
     if (talentId)
       axios
         .get(
-          `${VITE_API_URL}/projects?userId=${talentId}`,
+          `${VITE_API_URL}/projects?userId=${talentId}&page=${page}`,
           axiosHeaders(userToken)
         )
 
-        .then((obj) => setRelatedProjects(obj.data))
+        .then((response) => {
+          setRelatedProjects(response.data.projects);
+          setTotalPages(response.data.totalPages);
+        })
         .catch((e) => {
           setError(e);
           console.error(e);
         });
-  }, [talentId, userToken]);
+  }, [page, talentId, userToken]);
 
   const editProject = (newProps) => {
     const validProps = {};
@@ -94,6 +102,7 @@ export default () => {
       .then(() => {
         setFeedback("Project deleted successfully");
         setRefresh(!refresh);
+        navigate("/myprofile");
       })
       .catch((e) => {
         setError(e);
@@ -274,7 +283,14 @@ export default () => {
                   <div className="align-center">
                     <h1 className="H1">{project.title}</h1>
                     <div className="padding-S "></div>
-                    <p className="tag">category</p>
+                    {project.categories.map((c, i) => {
+                      return (
+                        <p key={`cat-${i}`} className="tag">
+                          {c.category_name}
+                        </p>
+                      );
+                    })}
+
                     <div className="padding-2 "></div>
                   </div>
                   <div className="project-info">
@@ -369,6 +385,7 @@ export default () => {
         </div>
       </section>
 
+      {/* RELATED PROJECTS */}
       <section className="section">
         <div className="container">
           <h2 className="H2">
@@ -377,43 +394,23 @@ export default () => {
               : "Loading..."}
           </h2>
           <div className="padding-3"></div>
-          <h1>
-            relatedProject da mettere a posto. CREDO sia dovuto alla paginazione
-          </h1>
-
-          {/* {error ? (
+          <h1>PAGINATION NOT WORKING</h1>
+          {error ? (
             <p>{error.message}</p>
           ) : (
             <>
               {relatedProjects === undefined ? (
                 <p>Loading...</p>
               ) : (
-                <div className="gallery-grid">
-                  {relatedProjects.map((p, i) => {
-                    return (
-                      <Link
-                        key={`project-${i}`}
-                        className="gallery-card"
-                        to={`/projects/${p._id}`}
-                        onClick={() => {
-                          window.scrollTo({ top: 0, behavior: "smooth" });
-                        }}
-                      >
-                        <img
-                          className="card-img"
-                          src={p.cover_img}
-                          alt="project cover"
-                        />
-                        <div className="gallery-card-top">
-                          <p className="card-title">{p.title}</p>
-                        </div>
-                      </Link>
-                    );
-                  })}
-                </div>
+                <GridProjects
+                  projects={relatedProjects}
+                  page={page}
+                  totalPages={totalPages}
+                  setPage={setPage}
+                />
               )}
             </>
-          )} */}
+          )}
         </div>
       </section>
     </>

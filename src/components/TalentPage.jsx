@@ -4,6 +4,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useUser } from "../../context/UserContext";
 import { axiosHeaders } from "../../libraries/utilitites";
 import NotFound from "./NotFound";
+import GridProjects from "./GridProjects";
 
 const { VITE_API_URL } = import.meta.env;
 
@@ -99,7 +100,14 @@ export default () => {
           <h1>
             relatedProject da mettere a posto. CREDO sia dovuto alla paginazione
           </h1>
-          {/* {relatedProjects === undefined ? (
+        </>
+      )}
+    </>
+  );
+};
+
+{
+  /* {relatedProjects === undefined ? (
             <p>Loading...</p>
           ) : (
             <section className="section header">
@@ -130,9 +138,5 @@ export default () => {
                 </div>
               </div>
             </section>
-          )} */}
-        </>
-      )}
-    </>
-  );
-};
+          )} */
+}

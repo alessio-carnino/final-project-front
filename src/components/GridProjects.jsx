@@ -1,7 +1,15 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-export default ({ projects, page, totalPages }) => {
+export default ({ projects, page, totalPages, setPage }) => {
+  const handleNextPage = () => {
+    setPage(page + 1);
+  };
+
+  const handlePrevPage = () => {
+    setPage(page - 1);
+  };
+
   return (
     <>
       <div className="gallery-grid">
@@ -21,27 +29,27 @@ export default ({ projects, page, totalPages }) => {
           );
         })}
       </div>
-      NON FUNZIONA LA PAGINAZIONE!!
+
       {/* PAGINATION -------------- */}
-      {/* <div className="pagination">
+      <div className="pagination">
         <span>{`Page ${page} of ${totalPages}`}</span>
         <div className="buttons-wrapper">
           <button
-            className="button secondary"
+            className="button pagination"
             onClick={handlePrevPage}
             disabled={page === 1}
           >
             Prev
           </button>
           <button
-            className="button secondary"
+            className="button pagination"
             onClick={handleNextPage}
             disabled={page === totalPages}
           >
             Next
           </button>
         </div>
-      </div> */}
+      </div>
     </>
   );
 };
