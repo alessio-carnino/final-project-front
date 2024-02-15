@@ -15,13 +15,13 @@ export default () => {
   const [page, setPage] = useState(1);
   const [categories, setCategories] = useState();
   const [selectCategory, setSelectedCategory] = useState(null);
+  const [activeButton, setActiveButton] = useState("");
 
   useEffect(() => {
     let url = `${VITE_API_URL}/projects?page=${page}`;
     if (selectCategory) {
-      url += `&category=${selectCategory}`;
+      url += `&categories=${selectCategory}`;
     }
-    console.log(url);
     axios
       .get(url, axiosHeaders(userToken))
       .then((response) => {
@@ -50,6 +50,12 @@ export default () => {
     setPage(1);
   };
 
+  const handleButtonCategoryClick = (categoryId) => {
+    setActiveButton(categoryId); // Update active button
+    setProjects([]);
+    handleCategoryClick(categoryId);
+  };
+
   return (
     <>
       <section className="section header">
@@ -73,14 +79,26 @@ export default () => {
                       <div className="fade-left"></div>
                       <div className="fade-right"></div>
 
+                      <button
+                        className={`button category ${
+                          activeButton === "" ? "active" : ""
+                        }`}
+                        onClick={() => {
+                          setProjects([]);
+                          handleCategoryClick("");
+                        }}
+                      >
+                        All categories
+                      </button>
+
                       {categories.map((c, i) => {
                         return (
                           <button
                             key={c._id}
-                            className="button category"
-                            onClick={() => {
-                              handleCategoryClick(c._id);
-                            }}
+                            className={`button category ${
+                              activeButton === c._id ? "active" : ""
+                            }`}
+                            onClick={() => handleButtonCategoryClick(c._id)}
                           >
                             {c.category_name}
                           </button>
