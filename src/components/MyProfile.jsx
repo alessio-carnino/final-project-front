@@ -12,7 +12,6 @@ export default () => {
   const { userToken, userId } = useUser();
 
   const [currentUser, setCurrentUser] = useState();
-  console.log({ currentUser });
   const [relatedProjects, setRelatedProjects] = useState();
   const [error, setError] = useState(false);
   const [totalPages, setTotalPages] = useState(1);

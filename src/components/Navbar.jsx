@@ -1,4 +1,4 @@
-import { NavLink, Navigate, useNavigate, useParams } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Homepage from "./Homepage";
 import About from "./About";
 import Projects from "./Projects";
