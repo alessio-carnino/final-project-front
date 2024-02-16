@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useUser } from "../../context/UserContext";
 import { axiosHeaders } from "../../libraries/utilitites";
 import NotFound from "./NotFound";
@@ -15,6 +15,9 @@ export default () => {
   const [talent, setTalent] = useState();
   const [relatedProjects, setRelatedProjects] = useState();
   const [error, setError] = useState(false);
+  const [totalPages, setTotalPages] = useState(1);
+  const [page, setPage] = useState(1);
+  console.log({ talent, relatedProjects });
 
   const navigate = useNavigate();
 
@@ -28,16 +31,23 @@ export default () => {
       });
   }, []);
 
+  // CALL TO PROJECTS FROM THE SAME USER ----------
   useEffect(() => {
-    axios
-      .get(`${VITE_API_URL}/projects?userId=${_id}`, axiosHeaders(userToken))
-
-      .then((obj) => setRelatedProjects(obj.data))
-      .catch((e) => {
-        setError(e);
-        console.error(e);
-      });
-  }, [talent]);
+    if (_id)
+      axios
+        .get(
+          `${VITE_API_URL}/projects?userId=${_id}&page=${page}`,
+          axiosHeaders(userToken)
+        )
+        .then((response) => {
+          setRelatedProjects(response.data.projects);
+          setTotalPages(response.data.totalPages);
+        })
+        .catch((e) => {
+          setError(e);
+          console.error(e);
+        });
+  }, [page, _id, talent]);
 
   return (
     <>
@@ -78,65 +88,28 @@ export default () => {
                   </div>
                 </div>
               </section>
+              <section className="section header">
+                <div className="container">
+                  <div className="align-center">
+                    <h1 className="H1">Projects</h1>
+                    <div className="padding-3"></div>
+                  </div>
+                  {relatedProjects === undefined ? (
+                    <p>Loading...</p>
+                  ) : (
+                    <GridProjects
+                      projects={relatedProjects}
+                      page={page}
+                      totalPages={totalPages}
+                      setPage={setPage}
+                    />
+                  )}
+                </div>
+              </section>
             </>
           )}
-        </>
-      )}
-
-      {error ? (
-        <>
-          <section className="section header">
-            <div className="container">
-              <div className="align-center">
-                <h1 className="H1">Projects</h1>
-                <p>{error.message}</p>
-                <div className="padding-3"></div>
-              </div>
-            </div>
-          </section>
-        </>
-      ) : (
-        <>
-          <h1>
-            relatedProject da mettere a posto. CREDO sia dovuto alla paginazione
-          </h1>
         </>
       )}
     </>
   );
 };
-
-{
-  /* {relatedProjects === undefined ? (
-            <p>Loading...</p>
-          ) : (
-            <section className="section header">
-              <div className="container">
-                <div className="align-center">
-                  <h1 className="H1">Projects</h1>
-                  <div className="padding-3"></div>
-                </div>
-                <div className="gallery-grid">
-                  {relatedProjects.map((p, i) => {
-                    return (
-                      <Link
-                        key={`project-${i}`}
-                        className="gallery-card"
-                        to={`/projects/${p._id}`}
-                      >
-                        <img
-                          className="card-img"
-                          src={p.cover_img}
-                          alt="project cover"
-                        />
-                        <div className="gallery-card-top">
-                          <p className="card-title">{p.title}</p>
-                        </div>
-                      </Link>
-                    );
-                  })}
-                </div>
-              </div>
-            </section>
-          )} */
-}

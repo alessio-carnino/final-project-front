@@ -31,25 +31,27 @@ export default ({ projects, page, totalPages, setPage }) => {
       </div>
 
       {/* PAGINATION -------------- */}
-      <div className="pagination">
-        <span>{`Page ${page} of ${totalPages}`}</span>
-        <div className="buttons-wrapper">
-          <button
-            className="button pagination"
-            onClick={handlePrevPage}
-            disabled={page === 1}
-          >
-            Prev
-          </button>
-          <button
-            className="button pagination"
-            onClick={handleNextPage}
-            disabled={page === totalPages}
-          >
-            Next
-          </button>
+      {totalPages <= 1 ? null : (
+        <div className="pagination">
+          <span>{`Page ${page} of ${totalPages}`}</span>
+          <div className="buttons-wrapper">
+            <button
+              className="button pagination"
+              onClick={handlePrevPage}
+              disabled={page === 1}
+            >
+              Prev
+            </button>
+            <button
+              className="button pagination"
+              onClick={handleNextPage}
+              disabled={page === totalPages}
+            >
+              Next
+            </button>
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 };

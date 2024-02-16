@@ -12,6 +12,7 @@ export default () => {
   const { userToken, userId } = useUser();
 
   const [currentUser, setCurrentUser] = useState();
+  console.log({ currentUser });
   const [relatedProjects, setRelatedProjects] = useState();
   const [error, setError] = useState(false);
   const [totalPages, setTotalPages] = useState(1);
@@ -51,6 +52,7 @@ export default () => {
 
   const navigate = useNavigate();
 
+  // CALL TO CURRENT USER ----------
   useEffect(() => {
     axios
       .get(`${VITE_API_URL}/users/${userId}`, axiosHeaders(userToken))
@@ -79,6 +81,35 @@ export default () => {
       });
   }, [page, currentUser]);
 
+  // CALL TO EDIT CURRENT USER ----------
+  const editProfile = (newProps) => {
+    const validProps = {};
+    Object.entries(newProps).forEach(([key, value]) => {
+      if (value !== "" && value !== undefined) {
+        validProps[key] = value;
+      }
+    });
+    if (Object.keys(validProps).length > 0) {
+      axios
+        .patch(
+          `${VITE_API_URL}/users/${userId}`,
+          validProps,
+          axiosHeaders(userToken)
+        )
+        .then((obj) => {
+          setFeedback("Profile updated successfully");
+          setCurrentUser(obj.data);
+          navigate(`/myprofile`);
+          setRefresh(!refresh);
+        })
+        .catch((e) => {
+          setFeedback("Please insert valid data");
+          console.error(e.message);
+        });
+    }
+  };
+
+  // ADD NEW PROJECT -----------------
   const addProject = (body) => {
     axios
       .post(`${VITE_API_URL}/projects`, body, axiosHeaders(userToken))

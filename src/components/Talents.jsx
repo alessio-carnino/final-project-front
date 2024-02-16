@@ -103,25 +103,27 @@ export default () => {
                   </div>
 
                   {/* PAGINATION -------------- */}
-                  <div className="pagination">
-                    <span>{`Page ${page} of ${totalPages}`}</span>
-                    <div className="buttons-wrapper">
-                      <button
-                        className="button secondary"
-                        onClick={handlePrevPage}
-                        disabled={page === 1}
-                      >
-                        Prev
-                      </button>
-                      <button
-                        className="button secondary"
-                        onClick={handleNextPage}
-                        disabled={page === totalPages}
-                      >
-                        Next
-                      </button>
+                  {totalPages <= 1 ? null : (
+                    <div className="pagination">
+                      <span>{`Page ${page} of ${totalPages}`}</span>
+                      <div className="buttons-wrapper">
+                        <button
+                          className="button secondary"
+                          onClick={handlePrevPage}
+                          disabled={page === 1}
+                        >
+                          Prev
+                        </button>
+                        <button
+                          className="button secondary"
+                          onClick={handleNextPage}
+                          disabled={page === totalPages}
+                        >
+                          Next
+                        </button>
+                      </div>
                     </div>
-                  </div>
+                  )}
                 </>
               )}
             </>

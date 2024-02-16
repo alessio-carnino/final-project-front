@@ -57,7 +57,6 @@ export default () => {
           `${VITE_API_URL}/projects?userId=${talentId}&page=${page}`,
           axiosHeaders(userToken)
         )
-
         .then((response) => {
           setRelatedProjects(response.data.projects);
           setTotalPages(response.data.totalPages);
@@ -394,7 +393,7 @@ export default () => {
               : "Loading..."}
           </h2>
           <div className="padding-3"></div>
-          <h1>PAGINATION NOT WORKING</h1>
+
           {error ? (
             <p>{error.message}</p>
           ) : (

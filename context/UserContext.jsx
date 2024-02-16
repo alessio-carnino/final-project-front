@@ -34,6 +34,8 @@ export const UseProvider = ({ children }) => {
       repeat_password,
       profession_title,
       cover_img,
+      description,
+      description_preview,
     } = props;
 
     if (password !== repeat_password) {
@@ -52,6 +54,8 @@ export const UseProvider = ({ children }) => {
         password,
         profession_title,
         cover_img,
+        description,
+        description_preview,
       });
       changeData(data);
     } catch (error) {
