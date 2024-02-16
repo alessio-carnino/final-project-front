@@ -34,7 +34,7 @@ export default ({ projects, page, totalPages, setPage }) => {
       {totalPages <= 1 ? null : (
         <div className="pagination">
           <span>{`Page ${page} of ${totalPages}`}</span>
-          <div className="buttons-wrapper">
+          <div className="buttons-wrapper pages">
             <button
               className="button pagination"
               onClick={handlePrevPage}

@@ -23,6 +23,8 @@ export default () => {
                 to showcase, collaborate, and be inspired. Unleash your talent,
                 connect with a vibrant community, and let your creativity soar.
               </p>
+              <div className="padding-2"></div>
+
               <div className="buttons-wrapper">
                 {userToken ? (
                   <>

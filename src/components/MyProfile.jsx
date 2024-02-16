@@ -149,7 +149,6 @@ export default () => {
             </>
           ) : (
             <>
-              <h1>FIX RADIO IN ADD NEW PROJECT MODAL</h1>
               <section className="section header">
                 <div className="container">
                   <div className="talents-header-component">
@@ -525,29 +524,63 @@ export default () => {
                   />
                 </label>
 
-                <label className="form-labe two-col">
-                  Categories
-                  <div className="radio-wrapper">
-                    {categories.map((c) => (
-                      <label key={c._id}>
-                        <input
-                          className="radio"
-                          type="radio"
-                          name={`category_${c._id}`}
-                          value={c._id}
-                          checked={formDataProject.categories === c._id}
-                          onChange={(e) => {
-                            const selectedCategoryId = parseInt(e.target.value);
-                            setFormDataProject({
-                              ...formDataProject,
-                              categories: selectedCategoryId,
-                            });
-                          }}
-                        />
-                        {c.category_name}
-                      </label>
+                {/* BBBBBBBBBBBBBBBBBBBBBBB */}
+                <label className="form-label ">
+                  Category 1 *
+                  <select
+                    value={formDataProject.category1}
+                    onChange={(e) => {
+                      setFormDataProject({
+                        ...formDataProject,
+                        category1: e.target.value,
+                      });
+                    }}
+                  >
+                    <option value="">Select Category</option>
+                    {categories.map((category) => (
+                      <option key={category._id} value={category._id}>
+                        {category.category_name}
+                      </option>
                     ))}
-                  </div>
+                  </select>
+                </label>
+                <label className="form-label">
+                  Category 2
+                  <select
+                    value={formDataProject.category2}
+                    onChange={(e) => {
+                      setFormDataProject({
+                        ...formDataProject,
+                        category2: e.target.value,
+                      });
+                    }}
+                  >
+                    <option value="">Select Category</option>
+                    {categories.map((category) => (
+                      <option key={category._id} value={category._id}>
+                        {category.category_name}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                <label className="form-label ">
+                  Category 3
+                  <select
+                    value={formDataProject.category3}
+                    onChange={(e) => {
+                      setFormDataProject({
+                        ...formDataProject,
+                        category3: e.target.value,
+                      });
+                    }}
+                  >
+                    <option value="">Select Category</option>
+                    {categories.map((category) => (
+                      <option key={category._id} value={category._id}>
+                        {category.category_name}
+                      </option>
+                    ))}
+                  </select>
                 </label>
 
                 <div className="submit-wrapper">

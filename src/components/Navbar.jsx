@@ -49,7 +49,7 @@ export default () => {
 
               <NavLink
                 className={"navlink"}
-                to={`/myprofile`} // ???????
+                to={`/myprofile`}
                 element={<MyProfile />}
               >
                 My Profile
