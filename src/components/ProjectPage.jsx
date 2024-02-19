@@ -202,8 +202,11 @@ export default () => {
                                 />
                               </button>
 
-                              <h3 className="H3">{`Are you sure you want to delete project ${project.title}`}</h3>
-                              <div className="padding-2"></div>
+                              <h3 className="H3">{`Are you sure you want to delete project ${project.title}?`}</h3>
+                              <div className="padding-1"></div>
+                              <p>This action will be irreversible</p>
+                              <div className="padding-3"></div>
+
                               <button
                                 className="button"
                                 onClick={() => {

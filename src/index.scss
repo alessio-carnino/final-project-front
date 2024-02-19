@@ -408,6 +408,7 @@ a {
     }
 
     .nav-right {
+      margin-left: auto;
       display: flex;
       gap: $gap-2;
       .navlink {
@@ -430,7 +431,7 @@ a {
 /* ------------------- Media queries --------------------- */
 /* ------------------- TABLET --------------------- */
 
-@media (max-width: 960px) {
+@media (max-width: 991px) {
   .navbar {
     .container.nav-container {
       padding: 1.5rem 0;
@@ -441,6 +442,10 @@ a {
 
       .nav-right {
         gap: $gap-1-5;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        padding: $gap-2;
 
         .navlink {
           font-size: $font-size-16;
@@ -459,6 +464,9 @@ a {
 @media (max-width: 640px) {
   .nav-left {
     max-width: 100px;
+  }
+  .nav-right {
+    padding: $gap-1;
   }
 }
 
