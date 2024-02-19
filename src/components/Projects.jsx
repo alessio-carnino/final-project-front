@@ -84,7 +84,6 @@ export default () => {
                           !activeButton ? "active" : ""
                         }`}
                         onClick={() => {
-                          // setProjects([]);
                           handleButtonCategoryClick(null);
                         }}
                       >
@@ -112,6 +111,7 @@ export default () => {
                     page={page}
                     totalPages={totalPages}
                     setPage={setPage}
+                    error={error}
                   />
                 </>
               )}

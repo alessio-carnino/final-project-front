@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import NotFound from "./NotFound";
 
-export default ({ projects, page, totalPages, setPage }) => {
+export default ({ projects, page, totalPages, setPage, error }) => {
   const handleNextPage = () => {
     setPage(page + 1);
   };
@@ -12,23 +13,39 @@ export default ({ projects, page, totalPages, setPage }) => {
 
   return (
     <>
-      <div className="gallery-grid">
-        {projects.map((p, i) => {
-          return (
-            <Link
-              key={`project-${i}`}
-              className="gallery-card"
-              to={`/projects/${p._id}`}
-            >
-              <img className="card-img" src={p.cover_img} alt="project cover" />
-              <div className="gallery-card-top">
-                <p className="card-title">{p.title}</p>
-                <p className="card-user">{p.user}</p>
-              </div>
-            </Link>
-          );
-        })}
-      </div>
+      {error ? (
+        <NotFound />
+      ) : (
+        <>
+          {projects.length === 0 ? (
+            <div className="align-center">
+              <h3 className="paragraph-L">Loading...</h3>
+            </div>
+          ) : (
+            <div className="gallery-grid">
+              {projects.map((p, i) => {
+                return (
+                  <Link
+                    key={`project-${i}`}
+                    className="gallery-card"
+                    to={`/projects/${p._id}`}
+                  >
+                    <img
+                      className="card-img"
+                      src={p.cover_img}
+                      alt="project cover"
+                    />
+                    <div className="gallery-card-top">
+                      <p className="card-title">{p.title}</p>
+                      <p className="card-user">{p.user}</p>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          )}
+        </>
+      )}
 
       {/* PAGINATION -------------- */}
       {totalPages <= 1 ? null : (
