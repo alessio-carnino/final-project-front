@@ -9,7 +9,7 @@ import GridProjects from "./GridProjects";
 const { VITE_API_URL } = import.meta.env;
 
 export default () => {
-  const { userToken, userId } = useUser();
+  const { userToken, userId, logOut } = useUser();
 
   const [currentUser, setCurrentUser] = useState();
   const [relatedProjects, setRelatedProjects] = useState();
@@ -32,6 +32,23 @@ export default () => {
     description_preview: "",
   };
   const [formDataProfile, setFormDataProfile] = useState(blankFormProfile);
+
+  // Modal to delete account
+  const [openModalDelete, setOpenModalDelete] = useState(false);
+
+  const deleteAccount = (userId) => {
+    axios
+      .delete(`${VITE_API_URL}/users/${userId}`, axiosHeaders(userToken))
+      .then(() => {
+        setFeedback("Account deleted successfully");
+        setRefresh(!refresh);
+        navigate("/");
+      })
+      .catch((e) => {
+        setError(e);
+        console.error(e.message);
+      });
+  };
 
   // Modal to add new Project
   const [openModalProject, setOpenModalProject] = useState(false);
@@ -602,6 +619,61 @@ export default () => {
                 {error && <p className="paragraph-L">{error.message}</p>}
               </form>
             </div>
+          </div>
+
+          {/* DELETE ACCOUNT */}
+          <div className="align-center">
+            <div className="padding-2"></div>
+            <div className="buttons-wrapper center">
+              {/* DELETE BUTTON  */}
+              <button
+                className="button secondary"
+                onClick={() => setOpenModalDelete(true)}
+              >
+                Delete Account
+              </button>
+              {/* DELETE MODAL */}
+              <div
+                className={
+                  openModalDelete === true ? "modal-open" : "modal-close"
+                }
+              >
+                <button
+                  className="close-layer"
+                  onClick={() => setOpenModalDelete(false)}
+                ></button>
+
+                <div className="modal-content">
+                  <button
+                    className="close"
+                    onClick={() => setOpenModalDelete(false)}
+                  >
+                    <img
+                      src="https://uploads-ssl.webflow.com/6389024564c0eaae543c5b10/65cb808a2a6c988cbfde18da_close.svg"
+                      alt="close icon"
+                    />
+                  </button>
+
+                  <h3 className="H3">{`Are you sure you want to delete your account?`}</h3>
+                  <div className="padding-1"></div>
+                  <p>This action will be irreversible</p>
+                  <div className="padding-3"></div>
+
+                  <button
+                    className="button"
+                    onClick={() => {
+                      deleteAccount(userId);
+                      logOut();
+                      navigate("/");
+                    }}
+                  >
+                    DELETE ACCOUNT
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div className="padding-3"></div>
           </div>
         </div>
       </section>
