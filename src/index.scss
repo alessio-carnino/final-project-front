@@ -1125,6 +1125,8 @@ a {
   }
 
   .modal-content {
+    width: 800px;
+    max-width: 90vw;
     padding: $gap-3 $gap-5;
     background-color: $color-dark;
     position: relative;
