@@ -110,7 +110,6 @@ export default () => {
 
   // ADD NEW PROJECT -----------------
   const addProject = (body) => {
-    console.log({ body });
     axios
       .post(`${VITE_API_URL}/projects`, body, axiosHeaders(userToken))
       .then(() => {
@@ -193,9 +192,11 @@ export default () => {
                           onClick={() => setOpenModalProfile(false)}
                         ></button>
                         <div className="modal-content">
-                          <button onClick={() => setOpenModalProfile(false)}>
+                          <button
+                            className="close"
+                            onClick={() => setOpenModalProfile(false)}
+                          >
                             <img
-                              className="close"
                               src="https://uploads-ssl.webflow.com/6389024564c0eaae543c5b10/65cb808a2a6c988cbfde18da_close.svg"
                               alt="close icon"
                             />
@@ -429,9 +430,11 @@ export default () => {
               onClick={() => setOpenModalProject(false)}
             ></button>
             <div className="modal-content">
-              <button onClick={() => setOpenModalProject(false)}>
+              <button
+                className="close"
+                onClick={() => setOpenModalProject(false)}
+              >
                 <img
-                  className="close"
                   src="https://uploads-ssl.webflow.com/6389024564c0eaae543c5b10/65cb808a2a6c988cbfde18da_close.svg"
                   alt="close icon"
                 />

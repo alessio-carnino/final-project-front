@@ -30,10 +30,23 @@ export default () => {
     cover_img: "",
     img1: "",
     img2: "",
+    categories: [],
   };
   const [formDataProject, setFormDataProject] = useState(blankFormProject);
-
   const [openModalDelete, setOpenModalDelete] = useState(false);
+
+  // CATEGORIES -------------------
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(`${VITE_API_URL}/categories`, axiosHeaders(userToken))
+      .then((obj) => setCategories(obj.data))
+      .catch((e) => {
+        setError(e);
+        console.error(e);
+      });
+  }, [userToken]);
 
   const [feedback, setFeedback] = useState();
   const [refresh, setRefresh] = useState(false);
@@ -77,6 +90,12 @@ export default () => {
       }
     });
     if (Object.keys(validProps).length > 0) {
+      let categories = [
+        formDataProject.category1,
+        formDataProject.category2,
+        formDataProject.category3,
+      ].filter(Boolean); // Remove undefined or empty values
+      validProps["categories"] = categories;
       axios
         .patch(
           `${VITE_API_URL}/projects/${project._id}`,
@@ -158,9 +177,11 @@ export default () => {
                             ></button>
 
                             <div className="modal-content">
-                              <button onClick={() => setOpenModalDelete(false)}>
+                              <button
+                                className="close"
+                                onClick={() => setOpenModalDelete(false)}
+                              >
                                 <img
-                                  className="close"
                                   src="https://uploads-ssl.webflow.com/6389024564c0eaae543c5b10/65cb808a2a6c988cbfde18da_close.svg"
                                   alt="close icon"
                                 />
@@ -179,7 +200,6 @@ export default () => {
                               </button>
                             </div>
                           </div>
-                          ;
                         </div>
 
                         <div className="padding-3"></div>
@@ -199,9 +219,11 @@ export default () => {
                         ></button>
 
                         <div className="modal-content">
-                          <button onClick={() => setOpenModalProject(false)}>
+                          <button
+                            className="close"
+                            onClick={() => setOpenModalProject(false)}
+                          >
                             <img
-                              className="close"
                               src="https://uploads-ssl.webflow.com/6389024564c0eaae543c5b10/65cb808a2a6c988cbfde18da_close.svg"
                               alt="close icon"
                             />
@@ -295,10 +317,91 @@ export default () => {
                               />
                             </label>
 
+                            <label className="form-label ">
+                              Category 1
+                              <select
+                                value={formDataProject.category1}
+                                onChange={(e) => {
+                                  setFormDataProject({
+                                    ...formDataProject,
+                                    category1: e.target.value,
+                                  });
+                                }}
+                              >
+                                <option value="">Select Category</option>
+                                {categories.map((category) => (
+                                  <option
+                                    key={category._id}
+                                    value={category._id}
+                                  >
+                                    {category.category_name}
+                                  </option>
+                                ))}
+                              </select>
+                            </label>
+                            <label className="form-label">
+                              Category 2
+                              <select
+                                value={formDataProject.category2}
+                                onChange={(e) => {
+                                  setFormDataProject({
+                                    ...formDataProject,
+                                    category2: e.target.value,
+                                  });
+                                }}
+                              >
+                                <option value="">Select Category</option>
+                                {categories.map((category) => (
+                                  <option
+                                    key={category._id}
+                                    value={category._id}
+                                  >
+                                    {category.category_name}
+                                  </option>
+                                ))}
+                              </select>
+                            </label>
+                            <label className="form-label ">
+                              Category 3
+                              <select
+                                value={formDataProject.category3}
+                                onChange={(e) => {
+                                  setFormDataProject({
+                                    ...formDataProject,
+                                    category3: e.target.value,
+                                  });
+                                }}
+                              >
+                                <option value="">Select Category</option>
+                                {categories.map((category) => (
+                                  <option
+                                    key={category._id}
+                                    value={category._id}
+                                  >
+                                    {category.category_name}
+                                  </option>
+                                ))}
+                              </select>
+                            </label>
+
                             <div className="submit-wrapper">
                               <button
                                 className="button"
                                 onClick={() => {
+                                  // e.preventDefault();
+                                  let categories = [formDataProject.category1];
+                                  if (formDataProject.category2) {
+                                    categories.push(formDataProject.category2);
+                                  }
+                                  if (formDataProject.category3) {
+                                    categories.push(formDataProject.category3);
+                                  }
+                                  const project = {
+                                    ...formDataProject,
+                                    categories: categories,
+                                  };
+                                  // setOpenModalProject(false);
+
                                   editProject(formDataProject);
                                   setFormDataProject(blankFormProject);
                                 }}

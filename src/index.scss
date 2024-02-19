@@ -485,24 +485,17 @@ a {
     border: 0;
     color: $color-off-white;
     font-size: $font-size-18;
-    padding: 0 1.5rem;
+    padding: 0 1rem;
   }
 
-  select[multiple] {
-    height: 80px;
+  select {
     border-radius: 1rem;
-    border: 1px solid transparent;
-
-    option {
-      padding: 6px $gap-1;
-      background-color: $color-grey;
-      color: $color-white;
-      font-size: $font-size-16;
-      border: 1px solid transparent;
-    }
-    option:checked {
-      background-color: red;
-    }
+    height: 54px;
+    background-color: $color-grey;
+    border: 0;
+    color: $color-off-white;
+    font-size: $font-size-18;
+    padding: 0 1rem;
   }
 }
 
@@ -556,6 +549,11 @@ a {
       height: 48px;
       font-size: $font-size-16;
     }
+    select {
+      border-radius: 0.75rem;
+      height: 48px;
+      font-size: $font-size-16;
+    }
   }
 
   .sign-figure {
@@ -588,6 +586,9 @@ a {
     input {
       border-radius: 0.5rem;
       padding: 0 1rem;
+    }
+    select {
+      border-radius: 0.5rem;
     }
   }
 
@@ -1087,7 +1088,9 @@ a {
       top: 2rem;
       right: 2rem;
       cursor: pointer;
-      width: 16px;
+      width: 18px;
+      background-color: transparent;
+      border: 0;
     }
   }
 }
