@@ -55,7 +55,19 @@ export default () => {
   useEffect(() => {
     axios
       .get(`${VITE_API_URL}/users/${userId}`, axiosHeaders(userToken))
-      .then((obj) => setCurrentUser(obj.data))
+      .then((obj) => {
+        setCurrentUser(obj.data);
+        setFormDataProfile({
+          first_name: obj.data.first_name,
+          last_name: obj.data.last_name,
+          user_name: obj.data.user_name,
+          email: obj.data.email,
+          profession_title: obj.data.profession_title,
+          cover_img: obj.data.cover_img,
+          description: obj.data.description,
+          description_preview: obj.data.description_preview,
+        });
+      })
       .catch((e) => {
         console.error(e);
         setError(true);
@@ -71,6 +83,10 @@ export default () => {
       )
 
       .then((response) => {
+        // Sort newest first
+        const sortedProjects = response.data.projects.sort((a, b) => {
+          return new Date(b.createdAt) - new Date(a.createdAt);
+        });
         setRelatedProjects(response.data.projects);
         setTotalPages(response.data.totalPages);
       })
@@ -268,34 +284,6 @@ export default () => {
                             </label>
 
                             <label className="form-label">
-                              Password
-                              <input
-                                type="password"
-                                value={formDataProfile.password}
-                                onChange={(e) => {
-                                  setFormDataProfile({
-                                    ...formDataProfile,
-                                    password: e.target.value,
-                                  });
-                                }}
-                              />
-                            </label>
-
-                            <label className="form-label">
-                              Repeat Password
-                              <input
-                                type="password"
-                                value={formDataProfile.repeat_password}
-                                onChange={(e) => {
-                                  setFormDataProfile({
-                                    ...formDataProfile,
-                                    repeat_password: e.target.value,
-                                  });
-                                }}
-                              />
-                            </label>
-
-                            <label className="form-label">
                               Profession Title
                               <input
                                 type="text"
@@ -325,7 +313,7 @@ export default () => {
 
                             <label className="form-label two-col">
                               Description
-                              <input
+                              <textarea
                                 type="text"
                                 value={formDataProfile.description}
                                 onChange={(e) => {
@@ -339,7 +327,7 @@ export default () => {
 
                             <label className="form-label two-col">
                               Description preview
-                              <input
+                              <textarea
                                 type="text"
                                 value={formDataProfile.description_preview}
                                 onChange={(e) => {
@@ -459,8 +447,22 @@ export default () => {
                 </label>
 
                 <label className="form-label">
-                  Description *
+                  Cover Image *
                   <input
+                    type="text"
+                    value={formDataProject.cover_img}
+                    onChange={(e) => {
+                      setFormDataProject({
+                        ...formDataProject,
+                        cover_img: e.target.value,
+                      });
+                    }}
+                  />
+                </label>
+
+                <label className="form-label two-col">
+                  Description *
+                  <textarea
                     type="text"
                     value={formDataProject.description}
                     onChange={(e) => {
@@ -472,29 +474,15 @@ export default () => {
                   />
                 </label>
 
-                <label className="form-label">
+                <label className="form-label two-col">
                   Description Part 2
-                  <input
+                  <textarea
                     type="text"
                     value={formDataProject.description2}
                     onChange={(e) => {
                       setFormDataProject({
                         ...formDataProject,
                         description2: e.target.value,
-                      });
-                    }}
-                  />
-                </label>
-
-                <label className="form-label">
-                  Cover Image *
-                  <input
-                    type="text"
-                    value={formDataProject.cover_img}
-                    onChange={(e) => {
-                      setFormDataProject({
-                        ...formDataProject,
-                        cover_img: e.target.value,
                       });
                     }}
                   />
@@ -605,6 +593,7 @@ export default () => {
                       addProject(project);
                       setFormDataProject(blankFormProject);
                       setOpenModalProject(false);
+                      navigate(`/myprofile`);
                     }}
                   >
                     Submit

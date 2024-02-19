@@ -12,7 +12,7 @@ export default ({ projects, page, totalPages, setPage, error }) => {
   };
 
   return (
-    <>
+    <div className="grid-component">
       {error ? (
         <NotFound />
       ) : (
@@ -22,27 +22,32 @@ export default ({ projects, page, totalPages, setPage, error }) => {
               <h3 className="paragraph-L">Loading...</h3>
             </div>
           ) : (
-            <div className="gallery-grid">
-              {projects.map((p, i) => {
-                return (
-                  <Link
-                    key={`project-${i}`}
-                    className="gallery-card"
-                    to={`/projects/${p._id}`}
-                  >
-                    <img
-                      className="card-img"
-                      src={p.cover_img}
-                      alt="project cover"
-                    />
-                    <div className="gallery-card-top">
-                      <p className="card-title">{p.title}</p>
-                      <p className="card-user">{p.user}</p>
-                    </div>
-                  </Link>
-                );
-              })}
-            </div>
+            <>
+              <div className="gallery-grid">
+                {projects.map((p, i) => {
+                  return (
+                    <Link
+                      key={`project-${i}`}
+                      className="gallery-card"
+                      to={`/projects/${p._id}`}
+                      onClick={() => {
+                        navigate(`/projects/${p._id}`);
+                      }}
+                    >
+                      <img
+                        className="card-img"
+                        src={p.cover_img}
+                        alt="project cover"
+                      />
+                      <div className="gallery-card-top">
+                        <p className="card-title">{p.title}</p>
+                        <p className="card-user">{p.user}</p>
+                      </div>
+                    </Link>
+                  );
+                })}
+              </div>
+            </>
           )}
         </>
       )}
@@ -69,6 +74,6 @@ export default ({ projects, page, totalPages, setPage, error }) => {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 };

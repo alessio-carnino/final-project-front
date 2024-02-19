@@ -13,6 +13,7 @@ export default () => {
   const [error, setError] = useState(false);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  console.log({ users });
 
   useEffect(() => {
     axios

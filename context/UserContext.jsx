@@ -7,7 +7,6 @@ const UserContext = createContext();
 export const UseProvider = ({ children }) => {
   const storedUserToken = localStorage.getItem("userToken");
   const [userToken, setUserToken] = useState(storedUserToken);
-  console.log({ storedUserToken });
   const storedUserId = localStorage.getItem("userId");
   const [userId, setUserId] = useState(storedUserId);
 

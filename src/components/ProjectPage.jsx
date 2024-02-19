@@ -18,7 +18,7 @@ export default () => {
   const [error, setError] = useState(false);
   const [totalPages, setTotalPages] = useState(1);
   const [page, setPage] = useState(1);
-
+  console.log({ project });
   const talentId = project?.user?._id;
 
   // Modal to edit Project
@@ -57,7 +57,20 @@ export default () => {
   useEffect(() => {
     axios
       .get(`${VITE_API_URL}/projects/${_id}`, axiosHeaders(userToken))
-      .then((obj) => setProject(obj.data))
+      .then((obj) => {
+        setProject(obj.data);
+        setFormDataProject({
+          title: obj.data.title,
+          description: obj.data.description,
+          description2: obj.data.description2,
+          cover_img: obj.data.cover_img,
+          img1: obj.data.img1,
+          img2: obj.data.img2,
+          category1: obj.data.categories[0] || "",
+          category2: obj.data.categories[1] || "",
+          category3: obj.data.categories[2] || "",
+        });
+      })
       .catch((e) => {
         console.error(e);
         setError(true);
@@ -82,6 +95,7 @@ export default () => {
         });
   }, [page, talentId, userToken]);
 
+  // CALL TO EDIT CURRENT PROJECT  ----------
   const editProject = (newProps) => {
     const validProps = {};
     Object.entries(newProps).forEach(([key, value]) => {
@@ -113,6 +127,7 @@ export default () => {
     }
   };
 
+  // CALL TO DELETE CURRENT PROJECT  ----------
   const deleteProject = (id) => {
     axios
       .delete(
@@ -248,8 +263,22 @@ export default () => {
                             </label>
 
                             <label className="form-label">
-                              Description
+                              Cover Image
                               <input
+                                type="text"
+                                value={formDataProject.cover_img}
+                                onChange={(e) => {
+                                  setFormDataProject({
+                                    ...formDataProject,
+                                    cover_img: e.target.value,
+                                  });
+                                }}
+                              />
+                            </label>
+
+                            <label className="form-label two-col">
+                              Description
+                              <textarea
                                 type="text"
                                 value={formDataProject.description}
                                 onChange={(e) => {
@@ -261,29 +290,15 @@ export default () => {
                               />
                             </label>
 
-                            <label className="form-label">
+                            <label className="form-label two-col">
                               Description Part 2
-                              <input
+                              <textarea
                                 type="text"
                                 value={formDataProject.description2}
                                 onChange={(e) => {
                                   setFormDataProject({
                                     ...formDataProject,
                                     description2: e.target.value,
-                                  });
-                                }}
-                              />
-                            </label>
-
-                            <label className="form-label">
-                              Cover Image
-                              <input
-                                type="text"
-                                value={formDataProject.cover_img}
-                                onChange={(e) => {
-                                  setFormDataProject({
-                                    ...formDataProject,
-                                    cover_img: e.target.value,
                                   });
                                 }}
                               />

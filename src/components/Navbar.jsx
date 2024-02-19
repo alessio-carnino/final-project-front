@@ -15,7 +15,6 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 
 export default () => {
   const { userToken, logOut } = useUser();
-  console.log({ userToken });
   const navigate = useNavigate();
 
   return (

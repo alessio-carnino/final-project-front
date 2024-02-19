@@ -25,6 +25,10 @@ export default () => {
     axios
       .get(url, axiosHeaders(userToken))
       .then((response) => {
+        // Sort newest first
+        const sortedProjects = response.data.projects.sort((a, b) => {
+          return new Date(b.createdAt) - new Date(a.createdAt);
+        });
         setProjects(response.data.projects);
         setTotalPages(response.data.totalPages);
       })

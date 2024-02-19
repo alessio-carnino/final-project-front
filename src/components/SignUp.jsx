@@ -155,7 +155,7 @@ export default () => {
 
             <label className="form-label two-col">
               Description
-              <input
+              <textarea
                 type="text"
                 value={formData.description}
                 onChange={(e) => {
@@ -169,7 +169,7 @@ export default () => {
 
             <label className="form-label two-col">
               Description preview
-              <input
+              <textarea
                 type="text"
                 value={formData.description_preview}
                 onChange={(e) => {
