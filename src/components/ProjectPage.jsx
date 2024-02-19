@@ -33,6 +33,8 @@ export default () => {
   };
   const [formDataProject, setFormDataProject] = useState(blankFormProject);
 
+  const [openModalDelete, setOpenModalDelete] = useState(false);
+
   const [feedback, setFeedback] = useState();
   const [refresh, setRefresh] = useState(false);
 
@@ -125,7 +127,6 @@ export default () => {
                 </>
               ) : (
                 <>
-                  {/* MODAL FORM TO EDIT PROJECT -------------------- */}
                   {userId === talentId ? (
                     <>
                       <div className="align-center">
@@ -136,21 +137,55 @@ export default () => {
                           >
                             Edit Project
                           </button>
-
                           {/* DELETE BUTTON  */}
                           <button
                             className="button secondary"
-                            onClick={() => {
-                              deleteProject(project._id);
-                              navigate("/projects");
-                            }}
+                            onClick={() => setOpenModalDelete(true)}
                           >
                             Delete Project
                           </button>
+                          {/* DELETE MODAL */}
+                          <div
+                            className={
+                              openModalDelete === true
+                                ? "modal-open"
+                                : "modal-close"
+                            }
+                          >
+                            <button
+                              className="close-layer"
+                              onClick={() => setOpenModalDelete(false)}
+                            ></button>
+
+                            <div className="modal-content">
+                              <button onClick={() => setOpenModalDelete(false)}>
+                                <img
+                                  className="close"
+                                  src="https://uploads-ssl.webflow.com/6389024564c0eaae543c5b10/65cb808a2a6c988cbfde18da_close.svg"
+                                  alt="close icon"
+                                />
+                              </button>
+
+                              <h3 className="H3">{`Are you sure you want to delete project ${project.title}`}</h3>
+                              <div className="padding-2"></div>
+                              <button
+                                className="button"
+                                onClick={() => {
+                                  deleteProject(project._id);
+                                  navigate("/projects");
+                                }}
+                              >
+                                DELETE PROJECT
+                              </button>
+                            </div>
+                          </div>
+                          ;
                         </div>
 
                         <div className="padding-3"></div>
                       </div>
+
+                      {/* MODAL EDIT PROJECT */}
                       <div
                         className={
                           openModalProject === true
@@ -162,6 +197,7 @@ export default () => {
                           className="close-layer"
                           onClick={() => setOpenModalProject(false)}
                         ></button>
+
                         <div className="modal-content">
                           <button onClick={() => setOpenModalProject(false)}>
                             <img
@@ -282,14 +318,15 @@ export default () => {
                   <div className="align-center">
                     <h1 className="H1">{project.title}</h1>
                     <div className="padding-S "></div>
-                    {project.categories.map((c, i) => {
-                      return (
-                        <p key={`cat-${i}`} className="tag">
-                          {c.category_name}
-                        </p>
-                      );
-                    })}
-
+                    <div className="tags-wrapper">
+                      {project.categories.map((c, i) => {
+                        return (
+                          <p key={`cat-${i}`} className="tag">
+                            {c.category_name}
+                          </p>
+                        );
+                      })}
+                    </div>
                     <div className="padding-2 "></div>
                   </div>
                   <div className="project-info">

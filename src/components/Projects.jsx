@@ -81,11 +81,11 @@ export default () => {
 
                       <button
                         className={`button category ${
-                          activeButton === "" ? "active" : ""
+                          !activeButton ? "active" : ""
                         }`}
                         onClick={() => {
-                          setProjects([]);
-                          handleCategoryClick("");
+                          // setProjects([]);
+                          handleButtonCategoryClick(null);
                         }}
                       >
                         All categories

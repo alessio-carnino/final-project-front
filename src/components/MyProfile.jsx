@@ -110,6 +110,7 @@ export default () => {
 
   // ADD NEW PROJECT -----------------
   const addProject = (body) => {
+    console.log({ body });
     axios
       .post(`${VITE_API_URL}/projects`, body, axiosHeaders(userToken))
       .then(() => {
@@ -524,7 +525,6 @@ export default () => {
                   />
                 </label>
 
-                {/* BBBBBBBBBBBBBBBBBBBBBBB */}
                 <label className="form-label ">
                   Category 1 *
                   <select
@@ -586,9 +586,22 @@ export default () => {
                 <div className="submit-wrapper">
                   <button
                     className="button"
-                    onClick={() => {
-                      addProject(formDataProject);
+                    onClick={(e) => {
+                      e.preventDefault();
+                      let categories = [formDataProject.category1];
+                      if (formDataProject.category2) {
+                        categories.push(formDataProject.category2);
+                      }
+                      if (formDataProject.category3) {
+                        categories.push(formDataProject.category3);
+                      }
+                      const project = {
+                        ...formDataProject,
+                        categories: categories,
+                      };
+                      addProject(project);
                       setFormDataProject(blankFormProject);
+                      setOpenModalProject(false);
                     }}
                   >
                     Submit

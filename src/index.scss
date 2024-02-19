@@ -197,6 +197,8 @@ a {
 
   .tag {
     font-size: $font-size-16;
+    display: inline;
+    color: $color-accent;
   }
 
   .section {
@@ -295,7 +297,7 @@ a {
     .fade-left {
       position: absolute;
       left: -2px;
-      top: 0;
+      top: -1px;
       height: 100%;
       width: 3rem;
       background: linear-gradient(90deg, $color-dark 5%, transparent);
@@ -304,7 +306,7 @@ a {
     .fade-right {
       position: absolute;
       right: -2px;
-      top: 0;
+      top: -1px;
       height: 100%;
       width: 3rem;
       background: linear-gradient(270deg, $color-dark 5%, transparent);
@@ -338,6 +340,20 @@ a {
   .buttons-wrapper {
     gap: $gap-1-5;
   }
+
+  .categories-wrapper {
+    .categories-component {
+      padding: 0 $gap-2 $gap-1 $gap-2;
+
+      .fade-left {
+        width: 2rem;
+      }
+
+      .fade-right {
+        width: 2rem;
+      }
+    }
+  }
 }
 
 /* ------------------- MOBILE --------------------- */
@@ -354,6 +370,20 @@ a {
 
   .buttons-wrapper.pages {
     flex-direction: row;
+  }
+
+  .categories-wrapper {
+    .categories-component {
+      padding: 0 $gap-1-5 $gap-1 $gap-1-5;
+
+      .fade-left {
+        width: 1.5rem;
+      }
+
+      .fade-right {
+        width: 1.5rem;
+      }
+    }
   }
 }
 
@@ -809,6 +839,13 @@ a {
 
 /* ------------------- SINGLE PROJECT --------------------- */
 
+.tags-wrapper {
+  display: flex;
+  gap: $gap-2;
+  justify-content: center;
+  margin-top: $gap-1;
+}
+
 .project-info {
   display: flex;
   justify-content: space-between;
@@ -850,9 +887,45 @@ a {
       object-fit: cover;
     }
   }
+}
 
-  // .author-card-content {
-  // }
+/* ------------------- Media queries --------------------- */
+/* ------------------- TABLET --------------------- */
+
+@media (max-width: 960px) {
+  .project-img-wrapper {
+    border-radius: 0.75rem;
+    margin-bottom: $gap-2;
+  }
+
+  .author-card-component {
+    margin-top: $gap-2;
+    padding: $gap-3;
+    border-radius: 1rem;
+    gap: $gap-2;
+  }
+}
+
+/* ------------------- MOBILE --------------------- */
+
+@media (max-width: 640px) {
+  .project-img-wrapper {
+    border-radius: 0.5rem;
+    margin-bottom: $gap-1;
+  }
+
+  .author-card-component {
+    margin-top: $gap-1-5;
+    padding: $gap-2;
+    border-radius: 0.75rem;
+    gap: $gap-1;
+    grid-template-columns: 1fr;
+    text-align: center;
+    .author-img {
+      width: 70%;
+      margin: auto;
+    }
+  }
 }
 
 /* ------------------- TALENTS PAGE --------------------- */
@@ -926,6 +999,59 @@ a {
   }
 }
 
+/* ------------------- Media queries --------------------- */
+/* ------------------- TABLET --------------------- */
+
+@media (max-width: 960px) {
+  .talents-header-component {
+    .talents-component-content {
+      width: 50%;
+    }
+
+    .talents-image-wrapper {
+      width: 45%;
+
+      img {
+        width: 90%;
+      }
+
+      .talent-cover {
+        width: 70%;
+      }
+    }
+  }
+
+  .talents-grid {
+    row-gap: $gap-4;
+    column-gap: $gap-2;
+  }
+}
+
+/* ------------------- MOBILE --------------------- */
+
+@media (max-width: 640px) {
+  .talents-header-component {
+    flex-direction: column;
+
+    .talents-component-content {
+      width: 80%;
+      text-align: center;
+    }
+
+    .talents-image-wrapper {
+      width: 80%;
+    }
+  }
+
+  .talents-grid {
+    width: 90%;
+    margin: auto;
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: $gap-3;
+    column-gap: $gap-3;
+  }
+}
+
 /* ------------------- MY PROFILE modal --------------------- */
 
 .modal-open {
@@ -967,6 +1093,42 @@ a {
 }
 .modal-close {
   display: none;
+}
+
+/* ------------------- Media queries --------------------- */
+/* ------------------- TABLET --------------------- */
+
+@media (max-width: 960px) {
+  .modal-open {
+    justify-content: center;
+    align-items: baseline;
+    overflow: auto;
+
+    .modal-content {
+      margin: $gap-2 0;
+      padding: $gap-2 $gap-3;
+      border-radius: 1rem;
+      max-width: 92vw;
+
+      .close {
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
+      }
+    }
+  }
+}
+
+/* ------------------- MOBILE --------------------- */
+
+@media (max-width: 640px) {
+  .modal-open {
+    .modal-content {
+      padding: $gap-2;
+      border-radius: 0.75rem;
+      max-width: 90vw;
+    }
+  }
 }
 
 /* ------------------- FOOTER --------------------- */
