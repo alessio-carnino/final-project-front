@@ -18,7 +18,6 @@ export default () => {
   const [error, setError] = useState(false);
   const [totalPages, setTotalPages] = useState(1);
   const [page, setPage] = useState(1);
-  console.log({ project });
   const talentId = project?.user?._id;
 
   // Modal to edit Project

@@ -33,16 +33,45 @@ export default () => {
   };
   const [formDataProfile, setFormDataProfile] = useState(blankFormProfile);
 
-  // Modal to delete account
+  // Modal to DELETE ACCOUNT and DELETE ALL PROJECTS FROM CURRENT USER:
   const [openModalDelete, setOpenModalDelete] = useState(false);
 
   const deleteAccount = (userId) => {
+    // First, fetch all projects of the user
     axios
-      .delete(`${VITE_API_URL}/users/${userId}`, axiosHeaders(userToken))
-      .then(() => {
-        setFeedback("Account deleted successfully");
-        setRefresh(!refresh);
-        navigate("/");
+      .get(`${VITE_API_URL}/projects?userId=${userId}`, axiosHeaders(userToken))
+      .then((response) => {
+        const projectsToDelete = response.data.projects;
+        // Delete each project one by one
+        Promise.all(
+          projectsToDelete.map((project) =>
+            axios.delete(
+              `${VITE_API_URL}/projects/${project._id}`,
+              axiosHeaders(userToken)
+            )
+          )
+        )
+          .then(() => {
+            // After all projects are deleted, delete the user account
+            axios
+              .delete(
+                `${VITE_API_URL}/users/${userId}`,
+                axiosHeaders(userToken)
+              )
+              .then(() => {
+                setFeedback("Account and projects deleted successfully");
+                setRefresh(!refresh);
+                navigate("/");
+              })
+              .catch((e) => {
+                setError(e);
+                console.error(e.message);
+              });
+          })
+          .catch((e) => {
+            setError(e);
+            console.error(e.message);
+          });
       })
       .catch((e) => {
         setError(e);
@@ -52,6 +81,7 @@ export default () => {
 
   // Modal to add new Project
   const [openModalProject, setOpenModalProject] = useState(false);
+
   const blankFormProject = {
     title: "",
     description: "",
@@ -177,9 +207,13 @@ export default () => {
         <>
           {currentUser === undefined ? (
             <>
-              <div className="align-center">
-                <h3 className="paragraph-L">Loading...</h3>
-              </div>
+              <section className="section header">
+                <div className="container">
+                  <div className="align-center">
+                    <h3 className="paragraph-L">Loading...</h3>
+                  </div>
+                </div>
+              </section>
             </>
           ) : (
             <>
@@ -399,12 +433,12 @@ export default () => {
             <>
               {relatedProjects === undefined ? (
                 <p>Loading...</p>
+              ) : relatedProjects.length === 0 ? (
+                <div className="align-center">
+                  <p className="paragraph-L">No projects available</p>
+                </div>
               ) : (
                 <>
-                  <div className="align-center">
-                    <h2 className="H2">Your Projects</h2>
-                    <div className="padding-3"></div>
-                  </div>
                   <GridProjects
                     projects={relatedProjects}
                     page={page}
@@ -628,7 +662,7 @@ export default () => {
             <div className="buttons-wrapper center">
               {/* DELETE BUTTON  */}
               <button
-                className="button secondary"
+                className="button red"
                 onClick={() => setOpenModalDelete(true)}
               >
                 Delete Account
@@ -657,6 +691,7 @@ export default () => {
 
                   <h3 className="H3">{`Are you sure you want to delete your account?`}</h3>
                   <div className="padding-1"></div>
+                  <p>All your projects will be deleted.</p>
                   <p>This action will be irreversible</p>
                   <div className="padding-3"></div>
 

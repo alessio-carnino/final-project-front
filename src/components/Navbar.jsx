@@ -24,7 +24,12 @@ export default () => {
       <nav class="navbar navbar-expand-lg navbar-dark ">
         <div class="container nav-container">
           <div className="nav-left">
-            <NavLink className="brand" to={"/"} element={<Homepage />}>
+            <NavLink
+              className="brand"
+              to={"/"}
+              element={<Homepage />}
+              onClick={collapseMenu}
+            >
               <img src="../logo.svg" alt="iNSPiREd logo" />
             </NavLink>
           </div>

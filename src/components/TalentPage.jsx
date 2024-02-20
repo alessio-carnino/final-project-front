@@ -17,7 +17,6 @@ export default () => {
   const [error, setError] = useState(false);
   const [totalPages, setTotalPages] = useState(1);
   const [page, setPage] = useState(1);
-  console.log({ talent, relatedProjects });
 
   const navigate = useNavigate();
 
@@ -90,12 +89,12 @@ export default () => {
               </section>
               <section className="section header">
                 <div className="container">
-                  <div className="align-center">
-                    <h1 className="H1">Projects</h1>
-                    <div className="padding-3"></div>
-                  </div>
                   {relatedProjects === undefined ? (
                     <p>Loading...</p>
+                  ) : relatedProjects.length === 0 ? (
+                    <div className="align-center">
+                      <p className="paragraph-L">No projects available</p>
+                    </div>
                   ) : (
                     <GridProjects
                       projects={relatedProjects}

@@ -258,7 +258,9 @@ a {
 
 .button.secondary {
   background-color: $color-grey;
-  color: $color-off-white;
+}
+.button.red {
+  background-color: rgb(212, 34, 34);
 }
 
 .button.pagination {
