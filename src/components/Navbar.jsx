@@ -21,8 +21,8 @@ export default () => {
 
   return (
     <>
-      <nav class="navbar navbar-expand-lg navbar-dark ">
-        <div class="container nav-container">
+      <nav className="navbar navbar-expand-lg navbar-dark ">
+        <div className="container nav-container">
           <div className="nav-left">
             <NavLink
               className="brand"
@@ -34,7 +34,7 @@ export default () => {
             </NavLink>
           </div>
           <button
-            class="navbar-toggler"
+            className="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarNavDropdown"
@@ -42,9 +42,9 @@ export default () => {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span class="navbar-toggler-icon"></span>
+            <span className="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <div className="collapse navbar-collapse" id="navbarNavDropdown">
             <menu className="nav-right">
               <NavLink
                 className={"navlink"}
