@@ -335,6 +335,7 @@ a {
 @media (max-width: 960px) {
   .button {
     font-size: $font-size-16;
+    padding: 0.75rem 1.5rem;
   }
 
   .buttons-wrapper {
@@ -359,12 +360,17 @@ a {
 /* ------------------- MOBILE --------------------- */
 
 @media (max-width: 640px) {
+  .button {
+    font-size: $font-size-16;
+    padding: 0.75rem 1.25rem;
+  }
   .button.pagination {
     padding: $gap-0-5 $gap-1;
   }
 
   .buttons-wrapper {
     flex-direction: column;
+    align-items: center;
     gap: $gap-1;
   }
 
@@ -898,6 +904,7 @@ a {
 .project-info {
   display: flex;
   justify-content: space-between;
+  margin-bottom: -1rem;
 }
 
 .project-img-wrapper {
@@ -1113,7 +1120,8 @@ a {
   left: 0;
   z-index: 10;
   justify-content: center;
-  align-items: center;
+  align-items: baseline;
+  overflow: auto;
 
   .close-layer {
     position: absolute;
@@ -1132,6 +1140,7 @@ a {
     position: relative;
     border-radius: 2rem;
     z-index: 2;
+    margin: 3rem 0;
 
     .close {
       position: absolute;

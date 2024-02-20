@@ -451,8 +451,7 @@ export default () => {
                     <div className="padding-2 "></div>
                   </div>
                   <div className="project-info">
-                    <p>{project.user.user_name}</p>
-                    <p>LIKES</p>
+                    <p>{`Author: ${project.user.user_name}`}</p>
                   </div>
                   <div className="padding-1 "></div>
                   <figure className="project-img-wrapper">

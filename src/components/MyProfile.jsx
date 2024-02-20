@@ -148,6 +148,7 @@ export default () => {
       .then(() => {
         setRefresh(!refresh);
         setFeedback("Project added successfully");
+        window.location.reload();
       })
       .catch((e) => {
         setFeedback("Please insert valid data");
@@ -208,7 +209,7 @@ export default () => {
                           className="button secondary"
                           onClick={() => setOpenModalProject(true)}
                         >
-                          Create New Project
+                          New Project
                         </button>
                       </div>
 

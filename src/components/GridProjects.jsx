@@ -32,6 +32,7 @@ export default ({ projects, page, totalPages, setPage, error }) => {
                       to={`/projects/${p._id}`}
                       onClick={() => {
                         navigate(`/projects/${p._id}`);
+                        window.location.reload();
                       }}
                     >
                       <img

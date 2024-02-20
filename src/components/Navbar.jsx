@@ -12,6 +12,13 @@ export default () => {
   const { userToken, logOut } = useUser();
   const navigate = useNavigate();
 
+  const collapseMenu = () => {
+    const navbar = document.querySelector(".navbar-collapse");
+    if (navbar.classList.contains("show")) {
+      navbar.classList.remove("show");
+    }
+  };
+
   return (
     <>
       <nav class="navbar navbar-expand-lg navbar-dark ">
@@ -34,10 +41,20 @@ export default () => {
           </button>
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <menu className="nav-right">
-              <NavLink className={"navlink"} to={"/"} element={<Homepage />}>
+              <NavLink
+                className={"navlink"}
+                to={"/"}
+                element={<Homepage />}
+                onClick={collapseMenu}
+              >
                 Home
               </NavLink>
-              <NavLink className={"navlink"} to={"/about"} element={<About />}>
+              <NavLink
+                className={"navlink"}
+                to={"/about"}
+                element={<About />}
+                onClick={collapseMenu}
+              >
                 About
               </NavLink>
 
@@ -47,6 +64,7 @@ export default () => {
                     className={"navlink"}
                     to={"/projects"}
                     element={<Projects />}
+                    onClick={collapseMenu}
                   >
                     Gallery
                   </NavLink>
@@ -54,6 +72,7 @@ export default () => {
                     className={"navlink"}
                     to={"/talents"}
                     element={<Talents />}
+                    onClick={collapseMenu}
                   >
                     Talents
                   </NavLink>
@@ -62,6 +81,7 @@ export default () => {
                     className={"navlink"}
                     to={`/myprofile`}
                     element={<MyProfile />}
+                    onClick={collapseMenu}
                   >
                     My Profile
                   </NavLink>
@@ -71,6 +91,7 @@ export default () => {
                     onClick={() => {
                       logOut();
                       navigate("/");
+                      collapseMenu();
                     }}
                   >
                     <b>Log Out</b>
@@ -82,6 +103,7 @@ export default () => {
                     className={"navlink"}
                     to={"/login"}
                     element={<LogIn />}
+                    onClick={collapseMenu}
                   >
                     <b>Log In</b>
                   </NavLink>
@@ -89,6 +111,7 @@ export default () => {
                     className={"navlink"}
                     to={"/signup"}
                     element={<SignUp />}
+                    onClick={collapseMenu}
                   >
                     <b>Sign Up</b>
                   </NavLink>
