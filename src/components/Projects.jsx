@@ -94,7 +94,7 @@ export default () => {
                         All categories
                       </button>
 
-                      {categories.map((c, i) => {
+                      {categories.map((c) => {
                         return (
                           <button
                             key={c._id}

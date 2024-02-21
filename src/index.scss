@@ -259,7 +259,7 @@ a {
   background-color: $color-accent;
   color: $color-off-white;
   font-weight: 800;
-  padding: 1rem 2rem;
+  padding: 0.75rem 1.5rem;
   font-size: $font-size-18;
   border-radius: 3rem;
   border: 0;
@@ -333,10 +333,6 @@ a {
     }
     .button.category.active {
       background-color: $color-accent;
-      color: $color-off-white;
-      padding: $gap-0-5 $gap-1;
-      margin: 0;
-      text-wrap: nowrap;
     }
   }
 }
@@ -374,7 +370,7 @@ a {
 @media (max-width: 640px) {
   .button {
     font-size: $font-size-16;
-    padding: 0.75rem 1.25rem;
+    padding: 0.5rem 1.25rem;
   }
   .button.pagination {
     padding: $gap-0-5 $gap-1;
@@ -392,14 +388,21 @@ a {
 
   .categories-wrapper {
     .categories-component {
-      padding: 0 $gap-1-5 $gap-1 $gap-1-5;
+      gap: $gap-0-5;
+      flex-wrap: wrap;
+      padding: 0 0 $gap-1 0;
+      justify-content: center;
+
+      .button.category {
+        padding: 0.25rem 0.75rem;
+      }
 
       .fade-left {
-        width: 1.5rem;
+        display: none;
       }
 
       .fade-right {
-        width: 1.5rem;
+        display: none;
       }
     }
   }
@@ -888,12 +891,12 @@ a {
   }
 
   .gallery-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
     gap: $gap-1;
 
     .gallery-card {
       border-radius: 0.5rem;
-      height: 28vw;
+      height: 50vw;
 
       .gallery-card-top {
         .card-title {

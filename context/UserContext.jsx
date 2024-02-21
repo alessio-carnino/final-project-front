@@ -10,7 +10,6 @@ export const UseProvider = ({ children }) => {
   const storedUserId = localStorage.getItem("userId");
   const [userId, setUserId] = useState(storedUserId);
 
-  // not sure about this (???)
   const changeData = (newData) => {
     if (newData) {
       setUserToken(newData.token);
