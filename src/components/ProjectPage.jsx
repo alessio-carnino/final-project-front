@@ -172,7 +172,7 @@ export default () => {
                           </button>
                           {/* DELETE BUTTON  */}
                           <button
-                            className="button secondary"
+                            className="button red"
                             onClick={() => setOpenModalDelete(true)}
                           >
                             Delete Project
@@ -488,11 +488,8 @@ export default () => {
 
                           {/* DELETE BUTTON  */}
                           <button
-                            className="button secondary"
-                            onClick={() => {
-                              deleteProject(project._id);
-                              navigate("/projects");
-                            }}
+                            className="button red"
+                            onClick={() => setOpenModalDelete(true)}
                           >
                             Delete Project
                           </button>

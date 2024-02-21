@@ -5,6 +5,7 @@ import { useUser } from "../../context/UserContext";
 import { axiosHeaders } from "../../libraries/utilitites";
 import NotFound from "./NotFound";
 import GridProjects from "./GridProjects";
+import NewProjectModal from "./NewProjectModal";
 
 const { VITE_API_URL } = import.meta.env;
 
@@ -462,7 +463,7 @@ export default () => {
           </div>
 
           {/* MODAL NEW PROJECT */}
-          <div
+          {/* <div
             className={openModalProject === true ? "modal-open" : "modal-close"}
           >
             <button
@@ -654,7 +655,18 @@ export default () => {
                 {error && <p className="paragraph-L">{error.message}</p>}
               </form>
             </div>
-          </div>
+          </div> */}
+          <NewProjectModal
+            openModalProject={openModalProject}
+            formDataProject={formDataProject}
+            categories={categories}
+            addProject={addProject}
+            setFormDataProject={setFormDataProject}
+            setOpenModalProject={setOpenModalProject}
+            navigate={navigate}
+            error={error}
+            blankFormProject={blankFormProject}
+          />
 
           {/* DELETE ACCOUNT */}
           <div className="align-center">

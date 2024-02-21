@@ -42,7 +42,7 @@ export default () => {
 
           <form className="sign-form">
             <label className="form-label">
-              First Name
+              First Name *
               <input
                 type="text"
                 value={formData.first_name}
@@ -56,7 +56,7 @@ export default () => {
             </label>
 
             <label className="form-label">
-              Last Name
+              Last Name *
               <input
                 type="text"
                 value={formData.last_name}
