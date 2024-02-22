@@ -63,6 +63,9 @@ body {
 .white {
   color: $color-white;
 }
+.red {
+  color: $color-red;
+}
 
 .padding-XS {
   padding-bottom: $gap-0-5;
@@ -122,6 +125,7 @@ p {
 }
 .paragraph-S {
   font-size: $font-size-16;
+  margin: 0;
 }
 
 .error-message {

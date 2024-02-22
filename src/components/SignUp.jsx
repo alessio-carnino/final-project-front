@@ -18,11 +18,19 @@ export default () => {
     description_preview: "",
   });
 
+  // State to check if passwords match
+  const [passwordsMatch, setPasswordsMatch] = useState(true);
+
   const navigate = useNavigate();
 
   const signUser = (e) => {
     e.preventDefault();
-    signUp(formData);
+    if (formData.password !== formData.repeat_password) {
+      setPasswordsMatch(false);
+    } else {
+      setPasswordsMatch(true);
+      signUp(formData);
+    }
   };
 
   useEffect(() => {
@@ -121,8 +129,12 @@ export default () => {
                     ...formData,
                     repeat_password: e.target.value,
                   });
+                  setPasswordsMatch(formData.password === e.target.value);
                 }}
               />
+              {!passwordsMatch && (
+                <p className="paragraph-S red">Passwords do not match</p>
+              )}
             </label>
 
             <label className="form-label">

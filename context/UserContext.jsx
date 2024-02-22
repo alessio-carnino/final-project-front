@@ -26,6 +26,7 @@ export const UseProvider = ({ children }) => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  // SIGNUP variable
   const signUp = async (props) => {
     if (loading) return;
 
@@ -70,6 +71,7 @@ export const UseProvider = ({ children }) => {
     }
   };
 
+  // LOGIN variable
   const logIn = async (props) => {
     if (loading) return;
 
@@ -92,6 +94,7 @@ export const UseProvider = ({ children }) => {
     }
   };
 
+  // LOGOUT variable
   const logOut = async (props) => {
     if (loading) return;
 

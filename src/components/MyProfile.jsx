@@ -37,6 +37,7 @@ export default () => {
   // Modal to DELETE ACCOUNT and DELETE ALL PROJECTS FROM CURRENT USER:
   const [openModalDelete, setOpenModalDelete] = useState(false);
 
+  // DELETE ACCOUNT and RELATED PROJECTS
   const deleteAccount = (userId) => {
     // First, fetch all projects of the user
     axios
@@ -82,7 +83,6 @@ export default () => {
 
   // Modal to add new Project
   const [openModalProject, setOpenModalProject] = useState(false);
-
   const blankFormProject = {
     title: "",
     description: "",
@@ -105,6 +105,7 @@ export default () => {
       .get(`${VITE_API_URL}/users/${userId}`, axiosHeaders(userToken))
       .then((obj) => {
         setCurrentUser(obj.data);
+        console.log(obj);
         setFormDataProfile({
           first_name: obj.data.first_name,
           last_name: obj.data.last_name,
@@ -131,7 +132,7 @@ export default () => {
       )
 
       .then((response) => {
-        // Sort newest first
+        // SORT newest first
         const sortedProjects = response.data.projects.sort((a, b) => {
           return new Date(b.createdAt) - new Date(a.createdAt);
         });
@@ -189,7 +190,6 @@ export default () => {
 
   // CATEGORIES -------------------
   const [categories, setCategories] = useState([]);
-
   useEffect(() => {
     axios
       .get(`${VITE_API_URL}/categories`, axiosHeaders(userToken))

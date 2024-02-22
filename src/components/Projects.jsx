@@ -16,7 +16,6 @@ export default () => {
   const [categories, setCategories] = useState();
   const [selectCategory, setSelectedCategory] = useState(null);
   const [activeButton, setActiveButton] = useState("");
-  console.log({ categories });
 
   useEffect(() => {
     let url = `${VITE_API_URL}/projects?page=${page}`;
