@@ -42,7 +42,6 @@ export const UseProvider = ({ children }) => {
       description,
       description_preview,
     } = props;
-
     if (password !== repeat_password) {
       throw new Error(`Passwords don't match`);
     }

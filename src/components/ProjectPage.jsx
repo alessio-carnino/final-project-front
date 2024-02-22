@@ -20,7 +20,7 @@ export default () => {
   const [page, setPage] = useState(1);
   const talentId = project?.user?._id;
 
-  // Modal to edit Project
+  // MODAL to edit Project
   const [openModalProject, setOpenModalProject] = useState(false);
   const blankFormProject = {
     title: "",
@@ -32,9 +32,10 @@ export default () => {
     categories: [],
   };
   const [formDataProject, setFormDataProject] = useState(blankFormProject);
+  console.log({ formDataProject });
   const [openModalDelete, setOpenModalDelete] = useState(false);
 
-  // CATEGORIES -------------------
+  // CALL TO CATEGORIES -------------------
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
@@ -337,7 +338,11 @@ export default () => {
                             <label className="form-label ">
                               Category 1
                               <select
-                                value={formDataProject.category1}
+                                value={
+                                  formDataProject.category1
+                                    ? formDataProject.category1._id
+                                    : undefined
+                                }
                                 onChange={(e) => {
                                   setFormDataProject({
                                     ...formDataProject,
@@ -359,7 +364,11 @@ export default () => {
                             <label className="form-label">
                               Category 2
                               <select
-                                value={formDataProject.category2}
+                                value={
+                                  formDataProject.category2
+                                    ? formDataProject.category2._id
+                                    : undefined
+                                }
                                 onChange={(e) => {
                                   setFormDataProject({
                                     ...formDataProject,
@@ -381,7 +390,11 @@ export default () => {
                             <label className="form-label ">
                               Category 3
                               <select
-                                value={formDataProject.category3}
+                                value={
+                                  formDataProject.category3
+                                    ? formDataProject.category3._id
+                                    : undefined
+                                }
                                 onChange={(e) => {
                                   setFormDataProject({
                                     ...formDataProject,

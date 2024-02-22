@@ -20,6 +20,7 @@ export default () => {
 
   const navigate = useNavigate();
 
+  // CALL TO CURRENT USER
   useEffect(() => {
     axios
       .get(`${VITE_API_URL}/users/${_id}`, axiosHeaders(userToken))

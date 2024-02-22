@@ -7,7 +7,6 @@ export default ({
   addProject,
   setFormDataProject,
   setOpenModalProject,
-  navigate,
   error,
   blankFormProject,
 }) => {
@@ -15,7 +14,7 @@ export default ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Validate form data
+    // VALIDATE FORM DATA
     if (
       !formDataProject.title ||
       !formDataProject.cover_img ||
@@ -24,7 +23,7 @@ export default ({
       setFormError("Please fill in all required fields");
       return;
     }
-    // Add project
+    // ADD PROJECT
     let categoriesArray = [];
     if (formDataProject.category1)
       categoriesArray.push(formDataProject.category1);
