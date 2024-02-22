@@ -58,6 +58,9 @@ export default () => {
                   });
                 }}
               />
+              {error && (
+                <p className="paragraph-S red">Incorrect email or password</p>
+              )}
             </label>
 
             <div className="submit-wrapper">
@@ -72,9 +75,6 @@ export default () => {
               </button>
             </div>
             {loading && <p className="paragraph-L">Loading...</p>}
-            {error && (
-              <p className="paragraph-L">Incorrect email or password</p>
-            )}
           </form>
           <figure className="sign-figure">
             <img
