@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Homepage from "./Homepage";
 import { useUser } from "../../context/UserContext";
 import Projects from "./Projects";
@@ -6,9 +6,7 @@ import MyProfile from "./MyProfile";
 import About from "./About";
 
 export default () => {
-  const { userToken, logOut } = useUser();
-
-  const navigate = useNavigate();
+  const { userToken } = useUser();
 
   return (
     <>

@@ -27,10 +27,12 @@ export default () => {
       });
   }, [page, userToken]);
 
+  // NEXT PAGE
   const handleNextPage = () => {
     setPage(page + 1);
   };
 
+  // PREV PAGE
   const handlePrevPage = () => {
     setPage(page - 1);
   };

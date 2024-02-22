@@ -12,6 +12,7 @@ export default () => {
   const { userToken, logOut } = useUser();
   const navigate = useNavigate();
 
+  // To close menu when clicking on a Navlink
   const collapseMenu = () => {
     const navbar = document.querySelector(".navbar-collapse");
     if (navbar.classList.contains("show")) {

@@ -25,7 +25,7 @@ export default () => {
     axios
       .get(url, axiosHeaders(userToken))
       .then((response) => {
-        // Sort newest first
+        // SORT newest first
         const sortedProjects = response.data.projects.sort((a, b) => {
           return new Date(b.createdAt) - new Date(a.createdAt);
         });

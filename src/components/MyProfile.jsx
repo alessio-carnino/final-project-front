@@ -37,9 +37,8 @@ export default () => {
   // Modal to DELETE ACCOUNT and DELETE ALL PROJECTS FROM CURRENT USER:
   const [openModalDelete, setOpenModalDelete] = useState(false);
 
-  // DELETE ACCOUNT and RELATED PROJECTS
   const deleteAccount = (userId) => {
-    // First, fetch all projects of the user
+    // Call to find all current user's projects
     axios
       .get(`${VITE_API_URL}/projects?userId=${userId}`, axiosHeaders(userToken))
       .then((response) => {
@@ -105,7 +104,6 @@ export default () => {
       .get(`${VITE_API_URL}/users/${userId}`, axiosHeaders(userToken))
       .then((obj) => {
         setCurrentUser(obj.data);
-        console.log(obj);
         setFormDataProfile({
           first_name: obj.data.first_name,
           last_name: obj.data.last_name,

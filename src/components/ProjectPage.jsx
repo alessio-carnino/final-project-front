@@ -32,7 +32,6 @@ export default () => {
     categories: [],
   };
   const [formDataProject, setFormDataProject] = useState(blankFormProject);
-  console.log({ formDataProject });
   const [openModalDelete, setOpenModalDelete] = useState(false);
 
   // CALL TO CATEGORIES -------------------
@@ -339,7 +338,7 @@ export default () => {
                               Category 1
                               <select
                                 value={
-                                  formDataProject.category1
+                                  formDataProject.category1._id
                                     ? formDataProject.category1._id
                                     : undefined
                                 }
@@ -365,7 +364,7 @@ export default () => {
                               Category 2
                               <select
                                 value={
-                                  formDataProject.category2
+                                  formDataProject.category2._id
                                     ? formDataProject.category2._id
                                     : undefined
                                 }
@@ -391,7 +390,7 @@ export default () => {
                               Category 3
                               <select
                                 value={
-                                  formDataProject.category3
+                                  formDataProject.category3._id
                                     ? formDataProject.category3._id
                                     : undefined
                                 }

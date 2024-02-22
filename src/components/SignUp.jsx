@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 export default () => {
   const { signUp, error, loading, userToken } = useUser();
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     first_name: "",
@@ -20,8 +21,6 @@ export default () => {
 
   // State to check if passwords match
   const [passwordsMatch, setPasswordsMatch] = useState(true);
-
-  const navigate = useNavigate();
 
   const signUser = (e) => {
     e.preventDefault();

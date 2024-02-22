@@ -26,7 +26,7 @@ export const UseProvider = ({ children }) => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  // SIGNUP variable
+  // SIGNUP -----------------------------------------
   const signUp = async (props) => {
     if (loading) return;
 

@@ -1,12 +1,13 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import NotFound from "./NotFound";
 
 export default ({ projects, page, totalPages, setPage, error }) => {
+  // NEXT PAGE
   const handleNextPage = () => {
     setPage(page + 1);
   };
 
+  // PREV PAGE
   const handlePrevPage = () => {
     setPage(page - 1);
   };
