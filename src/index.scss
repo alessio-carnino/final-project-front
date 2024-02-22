@@ -495,8 +495,8 @@ a {
 /* ------------------- FORM --------------------- */
 
 .sign-form {
-  width: 640px;
-  max-width: 100%;
+  width: 100%;
+  max-width: 640px;
   margin: auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -508,6 +508,7 @@ a {
   gap: $gap-0-5;
 
   input {
+    width: 100%;
     border-radius: 1rem;
     height: 54px;
     background-color: $color-grey;
@@ -518,6 +519,7 @@ a {
   }
 
   textarea {
+    width: 100%;
     font-family: "Poppins", sans-serif;
     border-radius: 1rem;
     height: 120px;
@@ -536,6 +538,7 @@ a {
   }
 
   select {
+    width: 100%;
     border-radius: 1rem;
     height: 54px;
     background-color: $color-grey;
@@ -1148,14 +1151,14 @@ a {
   }
 
   .modal-content {
-    width: 800px;
-    max-width: 90vw;
+    width: 90vw;
+    max-width: 800px;
     padding: $gap-3 $gap-5;
     background-color: $color-dark;
     position: relative;
     border-radius: 2rem;
     z-index: 2;
-    margin: 3rem 0;
+    margin: 3rem 0 3rem 0;
 
     .close {
       position: absolute;
