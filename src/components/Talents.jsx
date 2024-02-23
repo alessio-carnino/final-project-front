@@ -42,7 +42,7 @@ export default () => {
       <section className="section header">
         <div className="container">
           <div className="talents-header-component">
-            <div className="talents-component-content">
+            <div className="talents-component-content slide-up">
               <h1 className="H1">
                 Our <span className="accent-color">talents</span>
               </h1>

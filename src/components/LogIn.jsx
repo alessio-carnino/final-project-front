@@ -27,7 +27,7 @@ export default () => {
       <section className="section header">
         <div className="container">
           <div className="align-center">
-            <h1 className="H1">Log in</h1>
+            <h1 className="H1 slide-up">Log in</h1>
             <div className="padding-3"></div>
           </div>
 

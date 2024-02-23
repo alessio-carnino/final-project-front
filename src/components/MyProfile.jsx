@@ -219,7 +219,7 @@ export default () => {
               <section className="section header">
                 <div className="container">
                   <div className="talents-header-component">
-                    <div className="talents-component-content">
+                    <div className="talents-component-content slide-up">
                       <h1 className="H1">{currentUser.user_name}</h1>
 
                       <div className="padding-S"></div>
@@ -231,7 +231,7 @@ export default () => {
                       <p>{currentUser.description}</p>
 
                       <div className="padding-2"></div>
-                      <div className="buttons-wrapper">
+                      <div className="buttons-wrapper fade-in">
                         <button
                           className="button"
                           onClick={() => setOpenModalProfile(true)}

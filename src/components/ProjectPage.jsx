@@ -163,7 +163,7 @@ export default () => {
                   {userId === talentId ? (
                     <>
                       <div className="align-center">
-                        <div className="buttons-wrapper center">
+                        <div className="buttons-wrapper center fade-in">
                           <button
                             className="button"
                             onClick={() => setOpenModalProject(true)}
@@ -447,7 +447,7 @@ export default () => {
                     </>
                   ) : null}
 
-                  <div className="align-center">
+                  <div className="align-center slide-up">
                     <h1 className="H1">{project.title}</h1>
                     <div className="padding-S "></div>
                     <div className="tags-wrapper">
@@ -461,11 +461,11 @@ export default () => {
                     </div>
                     <div className="padding-2 "></div>
                   </div>
-                  <div className="project-info">
+                  <div className="project-info slide-up">
                     <p>{`Author: ${project.user.user_name}`}</p>
                   </div>
                   <div className="padding-1 "></div>
-                  <figure className="project-img-wrapper">
+                  <figure className="project-img-wrapper slide-up">
                     <img src={project.cover_img} alt="cover image" />
                   </figure>
                   <p>{project.description}</p>
@@ -514,7 +514,7 @@ export default () => {
                   <div className="padding-3 "></div>
                   <div className="divider"></div>
                   <div className="padding-3 "></div>
-                  <div className="author-card-component">
+                  <div className="author-card-component slide-up">
                     <figure className="author-img">
                       <img
                         src={project.user.cover_img}
@@ -522,7 +522,7 @@ export default () => {
                       />
                     </figure>
 
-                    <div className="author-card-content">
+                    <div className="author-card-content slide-up">
                       <h2 className="H3">{project.user.user_name}</h2>
                       <p className="paragraph-L">
                         {project.user.profession_title}
@@ -538,7 +538,7 @@ export default () => {
                         }
                         element={<MyProfile />}
                       >
-                        <button className="button">Learn More</button>
+                        <button className="button fade-in">Learn More</button>
                       </Link>
                     </div>
                   </div>
@@ -552,7 +552,7 @@ export default () => {
       {/* RELATED PROJECTS */}
       <section className="section">
         <div className="container">
-          <h2 className="H2">
+          <h2 className="H2 slide-up">
             {project && project.user && project.user.user_name
               ? `Other projects by ${project.user.user_name}`
               : "Loading..."}

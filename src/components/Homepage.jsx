@@ -12,7 +12,7 @@ export default () => {
       <section className="section hero">
         <div className="container">
           <div className="hero-component">
-            <div className="hero-content">
+            <div className="hero-content slide-up">
               <h1 className="H3">Elevate Your Creativity with</h1>
               <figure className="hero-logo">
                 <img src="../logo.svg" alt="iNSPiREd logo" />
@@ -25,7 +25,7 @@ export default () => {
               </p>
               <div className="padding-2"></div>
 
-              <div className="buttons-wrapper">
+              <div className="buttons-wrapper fade-in">
                 {userToken ? (
                   <>
                     <Link to={"/projects"} element={<Projects />}>

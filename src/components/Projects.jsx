@@ -65,7 +65,7 @@ export default () => {
       <section className="section header">
         <div className="container">
           <div className="align-center">
-            <h1 className="H1">Projects</h1>
+            <h1 className="H1 slide-up">Projects</h1>
             <div className="padding-3"></div>
           </div>
 
@@ -78,7 +78,7 @@ export default () => {
               ) : (
                 <>
                   {/* CATEGORIES ------------------- */}
-                  <div className="categories-wrapper">
+                  <div className="categories-wrapper fade-in">
                     <menu className="categories-component">
                       <div className="fade-left"></div>
                       <div className="fade-right"></div>

@@ -11,7 +11,7 @@ export default () => {
       <section className="section header">
         <div className="container">
           <div className="about-component">
-            <div className="about-content">
+            <div className="about-content slide-up">
               <h1 className="H1">
                 Our <span className="accent-color">purpose</span>
               </h1>
@@ -26,11 +26,11 @@ export default () => {
               <div className="padding-2"></div>
               {userToken ? (
                 <Link to={"/projects"} element={<Projects />}>
-                  <button className="button">Get Inspired</button>
+                  <button className="button fade-in">Get Inspired</button>
                 </Link>
               ) : (
                 <Link to={"/signup"} element={<SignUp />}>
-                  <button className="button">Join Now</button>
+                  <button className="button fade-in">Join Now</button>
                 </Link>
               )}
             </div>
