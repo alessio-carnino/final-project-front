@@ -92,6 +92,17 @@ export default () => {
                 </Link>
               </div>
             </div>
+            <div className="padding-2"></div>
+            <p className="paragraph-S">
+              Copyright© 2024 <br /> Alessio Carnino <br />
+              Full-Stack Web Developer
+            </p>
+            <a
+              className="paragraph-S accent-color"
+              href="mailto:alessiocarnino.web@gmail.com"
+            >
+              alessiocarnino.web@gmail.com
+            </a>
           </div>
         </div>
       </section>
