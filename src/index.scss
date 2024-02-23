@@ -429,6 +429,10 @@ a {
       max-width: 140px;
       .brand {
         width: 100%;
+        transition: all 1s ease-out;
+        :hover {
+          opacity: 70%;
+        }
       }
     }
 
