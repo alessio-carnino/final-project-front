@@ -598,6 +598,7 @@ a {
 @media (max-width: 960px) {
   .sign-form {
     width: 600px;
+    max-width: 100%;
     gap: $gap-1;
   }
   .form-label {

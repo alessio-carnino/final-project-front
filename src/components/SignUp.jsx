@@ -43,7 +43,7 @@ export default () => {
       <section className="section header">
         <div className="container">
           <div className="align-center">
-            <h1 className="H1">Sing up</h1>
+            <h1 className="H1">Sign up</h1>
             <div className="padding-3"></div>
           </div>
 
