@@ -204,7 +204,11 @@ export default () => {
               </button>
             </div>
             {loading && <p className="paragraph-L">Loading...</p>}
-            {error && <p className="paragraph-L">{error.message}</p>}
+            {error && (
+              <p className="paragraph-L red">
+                All required fields must be filled
+              </p>
+            )}
           </form>
           <figure className="sign-figure">
             <img
