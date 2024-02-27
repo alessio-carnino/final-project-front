@@ -417,7 +417,7 @@ export default () => {
                               <button
                                 className="button"
                                 onClick={() => {
-                                  // e.preventDefault();
+                                  e.preventDefault();
                                   let categories = [formDataProject.category1];
                                   if (formDataProject.category2) {
                                     categories.push(formDataProject.category2);
@@ -429,7 +429,7 @@ export default () => {
                                     ...formDataProject,
                                     categories: categories,
                                   };
-                                  // setOpenModalProject(false);
+                                  setOpenModalProject(false);
 
                                   editProject(formDataProject);
                                   setFormDataProject(blankFormProject);
